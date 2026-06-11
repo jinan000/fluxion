@@ -83,7 +83,7 @@ function GCCCanvas() {
         ctx.beginPath();
         ctx.moveTo(sx(from.x), sy(from.y));
         ctx.lineTo(sx(to.x), sy(to.y));
-        ctx.strokeStyle = 'rgba(42, 113, 123, 0.2)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
         ctx.lineWidth = 1;
         ctx.setLineDash([4, 4]);
         ctx.stroke();
@@ -102,13 +102,13 @@ function GCCCanvas() {
         // Glow
         ctx.beginPath();
         ctx.arc(x, y, 6, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(42, 113, 123, 0.15)';
+        ctx.fillStyle = 'rgba(0, 242, 254, 0.35)';
         ctx.fill();
 
         // Dot
         ctx.beginPath();
         ctx.arc(x, y, 3, 0, Math.PI * 2);
-        ctx.fillStyle = '#2A717B';
+        ctx.fillStyle = '#00f2fe';
         ctx.fill();
       });
 
@@ -176,8 +176,8 @@ export default function GCCNetwork() {
                 {/* Grid lines */}
                 {[...Array(10)].map((_, i) => (
                   <g key={i}>
-                    <line x1={i * 10} y1="0" x2={i * 10} y2="100" stroke="rgba(42,113,123,0.05)" strokeWidth="0.2" />
-                    <line x1="0" y1={i * 10} x2="100" y2={i * 10} stroke="rgba(42,113,123,0.05)" strokeWidth="0.2" />
+                    <line x1={i * 10} y1="0" x2={i * 10} y2="100" stroke="rgba(255, 255, 255, 0.05)" strokeWidth="0.2" />
+                    <line x1="0" y1={i * 10} x2="100" y2={i * 10} stroke="rgba(255, 255, 255, 0.05)" strokeWidth="0.2" />
                   </g>
                 ))}
 
@@ -190,7 +190,7 @@ export default function GCCNetwork() {
                     data-cursor-hover
                   >
                     {/* Pulse ring */}
-                    <circle cx={country.x} cy={country.y} r="3" fill="none" stroke="#2A717B" strokeWidth="0.3" opacity="0.3">
+                    <circle cx={country.x} cy={country.y} r="3" fill="none" stroke="#00f2fe" strokeWidth="0.3" opacity="0.3">
                       <animate attributeName="r" from="2" to="5" dur="2s" repeatCount="indefinite" />
                       <animate attributeName="opacity" from="0.5" to="0" dur="2s" repeatCount="indefinite" />
                     </circle>
@@ -200,7 +200,7 @@ export default function GCCNetwork() {
                       cx={country.x}
                       cy={country.y}
                       r={country.id === 'uae' ? 2.5 : 1.8}
-                      fill={activeCountry?.id === country.id || country.id === 'uae' ? '#2A717B' : '#28515E'}
+                      fill={activeCountry?.id === country.id || country.id === 'uae' ? '#00f2fe' : 'rgba(255, 255, 255, 0.4)'}
                     />
 
                     {/* Label */}
@@ -217,7 +217,7 @@ export default function GCCNetwork() {
                     </text>
 
                     {country.id === 'uae' && (
-                      <text x={country.x} y={country.y + 5} textAnchor="middle" fill="#2A717B" fontSize="1.6" fontWeight="bold">
+                      <text x={country.x} y={country.y + 5} textAnchor="middle" fill="#00f2fe" fontSize="1.6" fontWeight="bold">
                         HQ
                       </text>
                     )}

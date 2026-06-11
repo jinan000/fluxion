@@ -167,7 +167,7 @@ export default function CustomCursor() {
           height: '32px',
           marginLeft: '-16px',
           marginTop: '-16px',
-          borderColor: '#2A717B',
+          borderColor: '#4361ee',
           borderStyle: 'solid',
           borderWidth: '1px',
           background: 'transparent',

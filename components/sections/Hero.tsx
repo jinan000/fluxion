@@ -62,7 +62,7 @@ export default function Hero() {
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = `rgba(42, 113, 123, ${0.06 * (1 - dist / 250)})`;
+            ctx.strokeStyle = `rgba(67, 97, 238, ${0.08 * (1 - dist / 250)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -73,7 +73,7 @@ export default function Hero() {
       nodes.forEach((node) => {
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(42, 113, 123, 0.2)';
+        ctx.fillStyle = 'rgba(0, 242, 254, 0.3)';
         ctx.fill();
       });
 
@@ -93,13 +93,13 @@ export default function Hero() {
 
         ctx.beginPath();
         ctx.arc(x, y, 2.5, 0, Math.PI * 2);
-        ctx.fillStyle = '#2A717B';
+        ctx.fillStyle = '#4361ee';
         ctx.fill();
 
         // Glow
         ctx.beginPath();
         ctx.arc(x, y, 8, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(42, 113, 123, 0.1)';
+        ctx.fillStyle = 'rgba(0, 242, 254, 0.2)';
         ctx.fill();
       });
 
