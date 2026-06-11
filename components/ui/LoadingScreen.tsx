@@ -50,7 +50,7 @@ export default function LoadingScreen() {
                 alt="FLUXION Logo"
                 width={305}
                 height={100}
-                className="h-28 w-auto object-contain brightness-0 invert"
+                className="h-24 w-auto object-contain"
                 priority
               />
               <motion.div
@@ -79,8 +79,8 @@ export default function LoadingScreen() {
                 />
                 <defs>
                   <linearGradient id="routeGradient" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%" stopColor="#2A717B" />
-                    <stop offset="100%" stopColor="#253A5A" />
+                    <stop offset="0%" stopColor="#344b6a" />
+                    <stop offset="100%" stopColor="#405a7e" />
                   </linearGradient>
                 </defs>
               </svg>
@@ -88,14 +88,14 @@ export default function LoadingScreen() {
 
             {/* Progress bar */}
             <div className="w-48">
-              <div className="h-[2px] bg-white/10 rounded-full overflow-hidden">
+              <div className="h-[2px] bg-primary/10 rounded-full overflow-hidden">
                 <motion.div
                   className="h-full gradient-primary rounded-full"
                   style={{ width: `${displayProgress}%` }}
                   transition={{ duration: 0.3 }}
                 />
               </div>
-              <p className="text-xs text-white/50 text-center mt-3 font-body tracking-wider">
+              <p className="text-xs text-text-light text-center mt-3 font-body tracking-wider">
                 {displayProgress}%
               </p>
             </div>

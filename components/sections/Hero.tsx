@@ -130,9 +130,9 @@ export default function Hero() {
           quality={90}
           sizes="100vw"
         />
-        {/* Dark overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-accent/80 via-accent/70 to-accent/90" />
-        <div className="absolute inset-0 bg-gradient-to-r from-accent/50 to-transparent" />
+        {/* Light overlay gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/85 to-white/95" />
+        <div className="absolute inset-0 bg-gradient-to-r from-white/60 to-transparent" />
       </div>
 
       {/* Animated network canvas */}
@@ -151,17 +151,17 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 2, duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/15 mb-8"
             >
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <span className="text-xs text-white/60 font-medium tracking-wider uppercase">
+              <span className="text-xs text-text-light font-semibold tracking-wider uppercase">
                 GCC&apos;s Premier Logistics Partner
               </span>
             </motion.div>
 
             {/* Headline */}
             <motion.h1
-              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-white leading-[1.1] mb-6"
+              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-accent leading-[1.1] mb-6"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 2.2, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
@@ -187,18 +187,18 @@ export default function Hero() {
                   />
                   <defs>
                     <linearGradient id="heroUnderline" x1="0" y1="0" x2="1" y2="0">
-                      <stop offset="0%" stopColor="#2A717B" />
-                      <stop offset="100%" stopColor="#28515E" />
+                      <stop offset="0%" stopColor="#344b6a" />
+                      <stop offset="100%" stopColor="#405a7e" />
                     </linearGradient>
                   </defs>
                 </motion.svg>
               </span>
-              <span className="text-white">.</span>
+              <span className="text-accent">.</span>
             </motion.h1>
 
             {/* Subheadline */}
             <motion.p
-              className="text-lg md:text-xl text-white/60 leading-relaxed mb-10 max-w-xl"
+              className="text-lg md:text-xl text-text leading-relaxed mb-10 max-w-xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 2.5, duration: 0.7 }}
@@ -227,7 +227,7 @@ export default function Hero() {
 
             {/* Stats row */}
             <motion.div
-              className="flex gap-8 mt-12 pt-8 border-t border-white/10"
+              className="flex gap-8 mt-12 pt-8 border-t border-primary/10"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 3.2, duration: 0.8 }}
@@ -241,7 +241,7 @@ export default function Hero() {
                   <div className="text-2xl md:text-3xl font-heading font-bold text-primary">
                     {stat.value}
                   </div>
-                  <div className="text-xs text-white/40 mt-1">{stat.label}</div>
+                  <div className="text-xs text-text-light mt-1">{stat.label}</div>
                 </div>
               ))}
             </motion.div>
@@ -299,8 +299,8 @@ export default function Hero() {
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           className="flex flex-col items-center gap-2"
         >
-          <span className="text-xs text-white/30 tracking-widest uppercase">Scroll</span>
-          <div className="w-5 h-8 rounded-full border border-white/20 flex items-start justify-center p-1.5">
+          <span className="text-xs text-text-light/60 tracking-widest uppercase">Scroll</span>
+          <div className="w-5 h-8 rounded-full border border-primary/20 flex items-start justify-center p-1.5">
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}

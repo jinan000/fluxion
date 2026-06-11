@@ -58,9 +58,7 @@ export default function Navbar() {
               width={305}
               height={100}
               className={`w-auto object-contain transition-all duration-500 ${
-                scrolled 
-                  ? 'h-12 brightness-100' 
-                  : 'h-16 brightness-0 invert'
+                scrolled ? 'h-12' : 'h-16'
               }`}
               priority
             />
@@ -73,7 +71,7 @@ export default function Navbar() {
                 key={link.label}
                 onClick={() => scrollTo(link.href)}
                 className={`px-4 py-2 text-sm font-medium tracking-wide rounded-full transition-all duration-300 hover:bg-primary/10 ${
-                  scrolled ? 'text-text hover:text-primary' : 'text-white/80 hover:text-white'
+                  scrolled ? 'text-text hover:text-primary' : 'text-text-light hover:text-primary'
                 }`}
                 data-cursor-hover
               >
@@ -104,24 +102,18 @@ export default function Navbar() {
                 rotate: mobileOpen ? 45 : 0,
                 y: mobileOpen ? 5 : 0,
               }}
-              className={`w-6 h-[2px] rounded-full transition-colors ${
-                mobileOpen || scrolled ? 'bg-accent' : 'bg-white'
-              }`}
+              className="w-6 h-[2px] rounded-full bg-accent transition-colors"
             />
             <motion.span
               animate={{ opacity: mobileOpen ? 0 : 1 }}
-              className={`w-4 h-[2px] rounded-full transition-colors ${
-                scrolled ? 'bg-accent' : 'bg-white'
-              }`}
+              className="w-4 h-[2px] rounded-full bg-accent transition-colors"
             />
             <motion.span
               animate={{
                 rotate: mobileOpen ? -45 : 0,
                 y: mobileOpen ? -7 : 0,
               }}
-              className={`w-6 h-[2px] rounded-full transition-colors ${
-                mobileOpen || scrolled ? 'bg-accent' : 'bg-white'
-              }`}
+              className="w-6 h-[2px] rounded-full bg-accent transition-colors"
             />
           </button>
         </div>

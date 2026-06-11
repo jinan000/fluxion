@@ -76,7 +76,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative bg-accent overflow-hidden">
+    <footer className="relative bg-bg-soft overflow-hidden">
       {/* Decorative top border */}
       <div className="h-px w-full gradient-primary" />
 
@@ -97,9 +97,9 @@ export default function Footer() {
                 alt="FLUXION Logo"
                 width={305}
                 height={100}
-                className="h-20 w-auto object-contain mb-4 brightness-0 invert"
+                className="h-14 w-auto object-contain mb-4"
               />
-              <p className="text-white/50 text-sm leading-relaxed mb-6">
+              <p className="text-text-light text-sm leading-relaxed mb-6">
                 Premium customs clearance, freight forwarding, and cargo transportation
                 solutions connecting businesses across the GCC.
               </p>
@@ -111,7 +111,7 @@ export default function Footer() {
                     href="#"
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
-                    className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:text-primary hover:bg-primary/10 hover:border-primary/30 transition-all duration-300"
+                    className="w-10 h-10 rounded-full bg-primary/5 border border-primary/10 flex items-center justify-center text-text-light hover:text-primary hover:bg-primary/10 hover:border-primary/30 transition-all duration-300"
                     data-cursor-hover
                     aria-label={social.label}
                   >
@@ -125,7 +125,7 @@ export default function Footer() {
           {/* Quick Links */}
           <SectionReveal direction="up" delay={0.1}>
             <div>
-              <h4 className="text-sm font-heading font-semibold tracking-wider text-white/80 uppercase mb-6">
+              <h4 className="text-sm font-heading font-semibold tracking-wider text-accent uppercase mb-6">
                 Quick Links
               </h4>
               <ul className="space-y-3">
@@ -133,7 +133,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <button
                       onClick={() => scrollTo(link.href)}
-                      className="text-sm text-white/40 hover:text-primary transition-colors duration-300"
+                      className="text-sm text-text-light hover:text-primary transition-colors duration-300"
                       data-cursor-hover
                     >
                       {link.label}
@@ -147,7 +147,7 @@ export default function Footer() {
           {/* Services */}
           <SectionReveal direction="up" delay={0.2}>
             <div>
-              <h4 className="text-sm font-heading font-semibold tracking-wider text-white/80 uppercase mb-6">
+              <h4 className="text-sm font-heading font-semibold tracking-wider text-accent uppercase mb-6">
                 Services
               </h4>
               <ul className="space-y-3">
@@ -155,7 +155,7 @@ export default function Footer() {
                   <li key={service}>
                     <button
                       onClick={() => scrollTo('#services')}
-                      className="text-sm text-white/40 hover:text-primary transition-colors duration-300"
+                      className="text-sm text-text-light hover:text-primary transition-colors duration-300"
                       data-cursor-hover
                     >
                       {service}
@@ -169,14 +169,14 @@ export default function Footer() {
           {/* GCC Network & Newsletter */}
           <SectionReveal direction="up" delay={0.3}>
             <div>
-              <h4 className="text-sm font-heading font-semibold tracking-wider text-white/80 uppercase mb-6">
+              <h4 className="text-sm font-heading font-semibold tracking-wider text-accent uppercase mb-6">
                 GCC Locations
               </h4>
               <div className="flex flex-wrap gap-2 mb-8">
                 {gccLocations.map((loc) => (
                   <span
                     key={loc}
-                    className="text-xs text-white/40 bg-white/5 px-3 py-1.5 rounded-full border border-white/5"
+                    className="text-xs text-text-light bg-primary/5 px-3 py-1.5 rounded-full border border-primary/10"
                   >
                     {loc}
                   </span>
@@ -184,14 +184,14 @@ export default function Footer() {
               </div>
 
               {/* Newsletter */}
-              <h4 className="text-sm font-heading font-semibold tracking-wider text-white/80 uppercase mb-4">
+              <h4 className="text-sm font-heading font-semibold tracking-wider text-accent uppercase mb-4">
                 Newsletter
               </h4>
               <div className="flex gap-2">
                 <input
                   type="email"
                   placeholder="Your email"
-                  className="flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-2.5 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-primary/50 transition-colors"
+                  className="flex-1 bg-white border border-gray-200 rounded-full px-4 py-2.5 text-sm text-accent placeholder:text-text-light/50 focus:outline-none focus:border-primary/50 transition-colors"
                 />
                 <motion.button
                   whileHover={{ scale: 1.05 }}
@@ -207,18 +207,18 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="py-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/30">
+        <div className="py-6 border-t border-primary/10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-text-light/80">
             © {new Date().getFullYear()} FLUXION. All rights reserved. Sharjah, UAE.
           </p>
           <div className="flex gap-6">
-            <a href="#" className="text-xs text-white/30 hover:text-primary transition-colors" data-cursor-hover>
+            <a href="#" className="text-xs text-text-light/80 hover:text-primary transition-colors" data-cursor-hover>
               Privacy Policy
             </a>
-            <a href="#" className="text-xs text-white/30 hover:text-primary transition-colors" data-cursor-hover>
+            <a href="#" className="text-xs text-text-light/80 hover:text-primary transition-colors" data-cursor-hover>
               Terms of Service
             </a>
-            <a href="#" className="text-xs text-white/30 hover:text-primary transition-colors" data-cursor-hover>
+            <a href="#" className="text-xs text-text-light/80 hover:text-primary transition-colors" data-cursor-hover>
               Cookie Policy
             </a>
           </div>
