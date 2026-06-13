@@ -62,7 +62,7 @@ export default function Hero() {
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = `rgba(67, 97, 238, ${0.08 * (1 - dist / 250)})`;
+            ctx.strokeStyle = `rgba(27, 77, 84, ${0.1 * (1 - dist / 250)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -73,7 +73,7 @@ export default function Hero() {
       nodes.forEach((node) => {
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(0, 242, 254, 0.3)';
+        ctx.fillStyle = 'rgba(0, 152, 166, 0.3)';
         ctx.fill();
       });
 
@@ -93,13 +93,13 @@ export default function Hero() {
 
         ctx.beginPath();
         ctx.arc(x, y, 2.5, 0, Math.PI * 2);
-        ctx.fillStyle = '#4361ee';
+        ctx.fillStyle = '#1B4D54';
         ctx.fill();
 
         // Glow
         ctx.beginPath();
         ctx.arc(x, y, 8, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(0, 242, 254, 0.2)';
+        ctx.fillStyle = 'rgba(0, 152, 166, 0.25)';
         ctx.fill();
       });
 
@@ -187,8 +187,8 @@ export default function Hero() {
                   />
                   <defs>
                     <linearGradient id="heroUnderline" x1="0" y1="0" x2="1" y2="0">
-                      <stop offset="0%" stopColor="#344b6a" />
-                      <stop offset="100%" stopColor="#405a7e" />
+                      <stop offset="0%" stopColor="#1B4D54" />
+                      <stop offset="100%" stopColor="#236B75" />
                     </linearGradient>
                   </defs>
                 </motion.svg>

@@ -102,13 +102,13 @@ function GCCCanvas() {
         // Glow
         ctx.beginPath();
         ctx.arc(x, y, 6, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(0, 242, 254, 0.35)';
+        ctx.fillStyle = 'rgba(0, 152, 166, 0.35)';
         ctx.fill();
 
         // Dot
         ctx.beginPath();
         ctx.arc(x, y, 3, 0, Math.PI * 2);
-        ctx.fillStyle = '#00f2fe';
+        ctx.fillStyle = '#0098A6';
         ctx.fill();
       });
 
@@ -140,7 +140,7 @@ export default function GCCNetwork() {
   }, []);
 
   return (
-    <section id="network" className="section-padding gradient-accent relative overflow-hidden">
+    <section id="network" className="section-padding bg-gradient-to-br from-accent to-[#0D2340] relative overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-[80px]" />
@@ -150,12 +150,12 @@ export default function GCCNetwork() {
       <div className="max-w-7xl mx-auto relative">
         <SectionReveal>
           <div className="text-center mb-16">
-            <span className="text-xs font-medium tracking-[0.3em] uppercase text-primary mb-4 block">
+            <span className="text-xs font-medium tracking-[0.3em] uppercase text-secondary mb-4 block">
               Our Network
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-[#B2E2E6] mb-6">
               Connected Across the{' '}
-              <span className="text-primary">GCC</span>
+              <span className="text-secondary">GCC</span>
             </h2>
             <p className="text-white/50 text-lg max-w-2xl mx-auto">
               Our logistics network spans all six GCC nations, providing seamless cargo
@@ -190,7 +190,7 @@ export default function GCCNetwork() {
                     data-cursor-hover
                   >
                     {/* Pulse ring */}
-                    <circle cx={country.x} cy={country.y} r="3" fill="none" stroke="#00f2fe" strokeWidth="0.3" opacity="0.3">
+                    <circle cx={country.x} cy={country.y} r="3" fill="none" stroke="#0098A6" strokeWidth="0.3" opacity="0.3">
                       <animate attributeName="r" from="2" to="5" dur="2s" repeatCount="indefinite" />
                       <animate attributeName="opacity" from="0.5" to="0" dur="2s" repeatCount="indefinite" />
                     </circle>
@@ -200,7 +200,7 @@ export default function GCCNetwork() {
                       cx={country.x}
                       cy={country.y}
                       r={country.id === 'uae' ? 2.5 : 1.8}
-                      fill={activeCountry?.id === country.id || country.id === 'uae' ? '#00f2fe' : 'rgba(255, 255, 255, 0.4)'}
+                      fill={activeCountry?.id === country.id || country.id === 'uae' ? '#0098A6' : 'rgba(255, 255, 255, 0.4)'}
                     />
 
                     {/* Label */}
@@ -217,7 +217,7 @@ export default function GCCNetwork() {
                     </text>
 
                     {country.id === 'uae' && (
-                      <text x={country.x} y={country.y + 5} textAnchor="middle" fill="#00f2fe" fontSize="1.6" fontWeight="bold">
+                      <text x={country.x} y={country.y + 5} textAnchor="middle" fill="#0098A6" fontSize="1.6" fontWeight="bold">
                         HQ
                       </text>
                     )}
@@ -236,7 +236,7 @@ export default function GCCNetwork() {
                   onClick={() => toggleCountry(country)}
                   className={`p-5 rounded-xl border transition-all duration-300 cursor-pointer ${
                     activeCountry?.id === country.id
-                      ? 'bg-primary/10 border-primary/30'
+                      ? 'bg-secondary/10 border-secondary/30'
                       : 'bg-white/5 border-white/5 hover:border-white/15'
                   }`}
                   data-cursor-hover
@@ -244,7 +244,7 @@ export default function GCCNetwork() {
                 >
                   <div className="flex items-center gap-3">
                     <div className={`w-3 h-3 rounded-full ${
-                      activeCountry?.id === country.id ? 'bg-primary' : 'bg-white/20'
+                      activeCountry?.id === country.id ? 'bg-secondary' : 'bg-white/20'
                     } transition-colors`} />
                     <h4 className="text-white font-heading font-semibold text-sm">{country.name}</h4>
                   </div>
@@ -261,7 +261,7 @@ export default function GCCNetwork() {
                         <p className="text-white/40 text-sm mt-3 ml-6">{country.desc}</p>
                         <div className="flex gap-2 mt-3 ml-6 flex-wrap">
                           {country.cities.map((city) => (
-                            <span key={city} className="text-xs px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
+                            <span key={city} className="text-xs px-3 py-1 rounded-full bg-secondary/10 text-secondary border border-secondary/20">
                               {city}
                             </span>
                           ))}

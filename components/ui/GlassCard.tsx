@@ -16,7 +16,7 @@ export default function GlassCard({
   className = '',
   hover = true,
   tilt = true,
-  glowColor = 'rgba(42, 113, 123, 0.15)',
+  glowColor = 'rgba(27, 77, 84, 0.15)',
 }: GlassCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [rotateX, setRotateX] = useState(0);
@@ -77,7 +77,7 @@ export default function GlassCard({
           className="absolute inset-0 rounded-2xl"
           style={{
             padding: '1px',
-            background: 'linear-gradient(135deg, rgba(42, 113, 123, 0.4), rgba(40, 81, 94, 0.2), rgba(37, 58, 90, 0.4))',
+            background: 'linear-gradient(135deg, rgba(27, 77, 84, 0.4), rgba(35, 107, 117, 0.2), rgba(15, 30, 51, 0.4))',
             WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
             WebkitMaskComposite: 'xor',
             maskComposite: 'exclude',

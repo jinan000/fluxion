@@ -67,7 +67,7 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="section-padding gradient-accent relative overflow-hidden">
+    <section className="section-padding bg-gradient-to-br from-accent to-[#0D2340] relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px]" />
@@ -76,12 +76,12 @@ export default function Testimonials() {
       <div className="max-w-4xl mx-auto relative">
         <SectionReveal>
           <div className="text-center mb-12">
-            <span className="text-xs font-medium tracking-[0.3em] uppercase text-primary mb-4 block">
+            <span className="text-xs font-medium tracking-[0.3em] uppercase text-secondary mb-4 block">
               Testimonials
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-[#B2E2E6] mb-6">
               Trusted by{' '}
-              <span className="text-primary">Industry Leaders</span>
+              <span className="text-secondary">Industry Leaders</span>
             </h2>
           </div>
         </SectionReveal>
@@ -102,7 +102,7 @@ export default function Testimonials() {
               {/* Stars */}
               <div className="flex justify-center gap-1 mb-6">
                 {[...Array(testimonials[current].rating)].map((_, i) => (
-                  <svg key={i} className="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                  <svg key={i} className="w-5 h-5 text-secondary" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                   </svg>
                 ))}
@@ -139,7 +139,7 @@ export default function Testimonials() {
                 setCurrent(i);
               }}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                i === current ? 'bg-primary w-8' : 'bg-white/20 hover:bg-white/40'
+                i === current ? 'bg-secondary w-8' : 'bg-white/20 hover:bg-white/40'
               }`}
               data-cursor-hover
               aria-label={`Go to testimonial ${i + 1}`}

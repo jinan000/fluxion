@@ -79,8 +79,8 @@ export default function LoadingScreen() {
                 />
                 <defs>
                   <linearGradient id="routeGradient" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%" stopColor="#344b6a" />
-                    <stop offset="100%" stopColor="#405a7e" />
+                    <stop offset="0%" stopColor="#1B4D54" />
+                    <stop offset="100%" stopColor="#236B75" />
                   </linearGradient>
                 </defs>
               </svg>

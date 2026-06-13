@@ -83,7 +83,7 @@ export default function CustomCursor() {
         ring.style.marginLeft = '-24px';
         ring.style.marginTop = '-24px';
         ring.style.borderWidth = '2px';
-        ring.style.background = 'rgba(42, 113, 123, 0.06)';
+        ring.style.background = 'rgba(27, 77, 84, 0.06)';
       }
       if (dot) {
         dot.children[0]?.classList.add('scale-125');
@@ -167,7 +167,7 @@ export default function CustomCursor() {
           height: '32px',
           marginLeft: '-16px',
           marginTop: '-16px',
-          borderColor: '#4361ee',
+          borderColor: '#1B4D54',
           borderStyle: 'solid',
           borderWidth: '1px',
           background: 'transparent',
