@@ -82,8 +82,8 @@ export default function CustomCursor() {
         ring.style.height = '48px';
         ring.style.marginLeft = '-24px';
         ring.style.marginTop = '-24px';
-        ring.style.borderWidth = '2px';
-        ring.style.background = 'rgba(27, 77, 84, 0.06)';
+        ring.style.borderWidth = '1px';
+        ring.style.background = 'rgba(255, 255, 255, 0.15)';
       }
       if (dot) {
         dot.children[0]?.classList.add('scale-125');
@@ -147,19 +147,19 @@ export default function CustomCursor() {
       {/* Inner dot */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 pointer-events-none z-[99998] opacity-0"
+        className="fixed top-0 left-0 pointer-events-none z-[99998] opacity-0 mix-blend-difference"
         style={{ willChange: 'transform', transition: 'opacity 0.3s' }}
       >
         <div
-          className="w-[6px] h-[6px] rounded-full gradient-primary transition-transform duration-150"
-          style={{ marginLeft: '-3px', marginTop: '-3px' }}
+          className="w-[8px] h-[8px] rounded-full bg-white transition-transform duration-150"
+          style={{ marginLeft: '-4px', marginTop: '-4px' }}
         />
       </div>
 
       {/* Outer ring */}
       <div
         ref={ringRef}
-        className="fixed top-0 left-0 pointer-events-none z-[99997] opacity-0 rounded-full"
+        className="fixed top-0 left-0 pointer-events-none z-[99997] opacity-0 rounded-full mix-blend-difference"
         style={{
           willChange: 'transform',
           transition: 'width 0.3s ease, height 0.3s ease, margin 0.3s ease, opacity 0.3s, border-width 0.2s, background 0.3s',
@@ -167,7 +167,7 @@ export default function CustomCursor() {
           height: '32px',
           marginLeft: '-16px',
           marginTop: '-16px',
-          borderColor: '#1B4D54',
+          borderColor: 'white',
           borderStyle: 'solid',
           borderWidth: '1px',
           background: 'transparent',

@@ -225,7 +225,7 @@ export default function Contact() {
 
               {/* Phone */}
               <motion.a
-                href="tel:+97165551234"
+                href="tel:+971589250501"
                 className="p-6 rounded-2xl bg-white shadow-premium flex items-start gap-4 hover:shadow-premium-hover transition-shadow"
                 whileHover={{ x: 4 }}
                 data-cursor-hover
@@ -237,14 +237,14 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-heading font-semibold text-accent mb-1">Call Us</h4>
-                  <p className="text-sm text-primary font-medium">+971 6 555 1234</p>
+                  <p className="text-sm text-primary font-medium">+971 58 925 0501</p>
                   <p className="text-xs text-text-light mt-1">Available 24/7</p>
                 </div>
               </motion.a>
 
               {/* Email */}
               <motion.a
-                href="mailto:info@fluxionlogistics.com"
+                href="mailto:INFO@FLUXIONUAE.COM"
                 className="p-6 rounded-2xl bg-white shadow-premium flex items-start gap-4 hover:shadow-premium-hover transition-shadow"
                 whileHover={{ x: 4 }}
                 data-cursor-hover
@@ -256,14 +256,14 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-heading font-semibold text-accent mb-1">Email</h4>
-                  <p className="text-sm text-primary font-medium">info@fluxionlogistics.com</p>
+                  <p className="text-sm text-primary font-medium">INFO@FLUXIONUAE.COM</p>
                   <p className="text-xs text-text-light mt-1">Response within 2 hours</p>
                 </div>
               </motion.a>
 
               {/* WhatsApp */}
               <motion.a
-                href="https://wa.me/97165551234"
+                href="https://wa.me/971589250501"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-6 rounded-2xl bg-gradient-to-r from-[#25D366]/10 to-[#128C7E]/10 border border-[#25D366]/20 flex items-start gap-4 hover:from-[#25D366]/15 hover:to-[#128C7E]/15 transition-all"

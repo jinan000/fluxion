@@ -55,8 +55,8 @@ export default function Navbar() {
             <Image
               src="/images/logo.png"
               alt="FLUXION Logo"
-              width={305}
-              height={100}
+              width={1548}
+              height={509}
               className={`w-auto object-contain transition-all duration-500 ${
                 scrolled ? 'h-12' : 'h-16'
               }`}

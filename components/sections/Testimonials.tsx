@@ -79,7 +79,7 @@ export default function Testimonials() {
             <span className="text-xs font-medium tracking-[0.3em] uppercase text-secondary mb-4 block">
               Testimonials
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-[#B2E2E6] mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white mb-6">
               Trusted by{' '}
               <span className="text-secondary">Industry Leaders</span>
             </h2>

@@ -32,20 +32,24 @@
   color: #0F1E33;
 }
 
-html {
-  overflow-x: hidden;
+@layer base {
+  html {
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background-color: var(--color-bg-white);
+    overflow-x: hidden;
+  }
 }
 
-body {
-  font-family: var(--font-body);
-  color: var(--color-text);
-  background-color: var(--color-bg-white);
-  overflow-x: hidden;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  color: var(--color-accent);
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--color-accent);
+  }
 }
 
 /* ═══════════════════════════════════════════

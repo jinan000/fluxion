@@ -48,8 +48,8 @@ export default function LoadingScreen() {
               <Image
                 src="/images/logo.png"
                 alt="FLUXION Logo"
-                width={305}
-                height={100}
+                width={1548}
+                height={509}
                 className="h-24 w-auto object-contain"
                 priority
               />
