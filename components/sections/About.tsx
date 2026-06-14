@@ -7,9 +7,9 @@ import { StaggerContainer, StaggerItem } from '../ui/SectionReveal';
 import AnimatedCounter from '../ui/AnimatedCounter';
 
 const stats = [
-  { value: 15, suffix: '+', label: 'Years of Excellence' },
+  { value: 5, suffix: '+', label: 'Years of Excellence' },
   { value: 6, suffix: '', label: 'GCC Countries Served' },
-  { value: 10000, suffix: '+', label: 'Annual Shipments' },
+  { value: 5000, suffix: '+', label: 'Annual Shipments' },
   { value: 99, suffix: '%', label: 'Client Satisfaction' },
 ];
 

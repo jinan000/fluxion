@@ -34,7 +34,7 @@ const advantages = [
     ),
     title: 'Freight Expertise',
     desc: 'Air, sea, and land forwarding solutions.',
-    stat: { value: 10000, suffix: '+', label: 'Shipments/Year' },
+    stat: { value: 5000, suffix: '+', label: 'Shipments/Year' },
   },
   {
     icon: (

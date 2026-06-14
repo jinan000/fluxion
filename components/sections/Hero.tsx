@@ -233,9 +233,9 @@ export default function Hero() {
               transition={{ delay: 3.2, duration: 0.8 }}
             >
               {[
-                { value: '15+', label: 'Years Experience' },
+                { value: '5+', label: 'Years Experience' },
                 { value: '6', label: 'GCC Countries' },
-                { value: '10K+', label: 'Shipments Yearly' },
+                { value: '5000+', label: 'Shipments Yearly' },
               ].map((stat) => (
                 <div key={stat.label}>
                   <div className="text-2xl md:text-3xl font-heading font-bold text-primary">
