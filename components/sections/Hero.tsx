@@ -119,20 +119,20 @@ export default function Hero() {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background Image */}
+      {/* Background Video */}
       <div className="absolute inset-0">
-        <Image
-          src="/images/hero-bg.png"
-          alt="Premium logistics port"
-          fill
-          className="object-cover"
-          priority
-          quality={90}
-          sizes="100vw"
-        />
-        {/* Light overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/85 to-white/95" />
-        <div className="absolute inset-0 bg-gradient-to-r from-white/60 to-transparent" />
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover"
+        >
+          <source src="/images/video.mp4" type="video/mp4" />
+        </video>
+        {/* Small light overlay gradient for readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/20 to-white/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-white/30 to-transparent" />
       </div>
 
       {/* Animated network canvas */}
@@ -247,43 +247,6 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Video Placeholder */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 2.6, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-            className="hidden lg:block"
-          >
-            <div className="relative rounded-2xl overflow-hidden glass border border-white/10 aspect-video">
-              {/* Video placeholder with gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/20 flex items-center justify-center">
-                {/* Play button */}
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-20 h-20 rounded-full gradient-primary flex items-center justify-center shadow-premium-lg"
-                  data-cursor-hover
-                >
-                  <svg className="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </motion.button>
-              </div>
-
-              {/* Overlay text */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-accent/80 to-transparent">
-                <p className="text-sm text-white/60 font-medium tracking-wider">
-                  Connecting the Gulf Through Intelligent Logistics
-                </p>
-              </div>
-
-              {/* Animated corner accents */}
-              <div className="absolute top-3 left-3 w-8 h-8 border-l-2 border-t-2 border-primary/30 rounded-tl-lg" />
-              <div className="absolute top-3 right-3 w-8 h-8 border-r-2 border-t-2 border-primary/30 rounded-tr-lg" />
-              <div className="absolute bottom-3 left-3 w-8 h-8 border-l-2 border-b-2 border-primary/30 rounded-bl-lg" />
-              <div className="absolute bottom-3 right-3 w-8 h-8 border-r-2 border-b-2 border-primary/30 rounded-br-lg" />
-            </div>
-          </motion.div>
         </div>
       </div>
 

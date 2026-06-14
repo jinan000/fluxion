@@ -1,21 +1,33 @@
 'use client';
 
-import { useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 
-export default function CustomCursor() {
+const random = (min: number, max: number) => Math.random() * (max - min) + min;
+
+export default function CustomCursor({
+  color = "#ffffff",
+  velocityThreshold = 5,
+}: {
+  color?: string;
+  velocityThreshold?: number;
+} = {}) {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
   const mousePos = useRef({ x: -100, y: -100 });
+  const mouseRef = useRef({ x: -100, y: -100, prevX: -100, prevY: -100, vX: 0, vY: 0 });
   const ringPos = useRef({ x: -100, y: -100 });
   const isHovering = useRef(false);
   const isVisible = useRef(false);
   const dotScale = useRef(1);
   const rafId = useRef<number>(0);
+  const particlesRef = useRef<any[]>([]);
 
   const updateCursorVisuals = useCallback(function updateCursorVisualsLocal() {
     const dot = dotRef.current;
     const ring = ringRef.current;
-    if (!dot || !ring) return;
+    const canvas = canvasRef.current;
 
     // Smooth ring follow
     const dx = mousePos.current.x - ringPos.current.x;
@@ -23,56 +35,128 @@ export default function CustomCursor() {
     ringPos.current.x += dx * 0.15;
     ringPos.current.y += dy * 0.15;
 
-    dot.style.transform = `translate3d(${mousePos.current.x}px, ${mousePos.current.y}px, 0) scale(${dotScale.current})`;
-    ring.style.transform = `translate3d(${ringPos.current.x}px, ${ringPos.current.y}px, 0)`;
+    if (dot && ring) {
+      dot.style.transform = `translate3d(${mousePos.current.x}px, ${mousePos.current.y}px, 0) scale(${dotScale.current})`;
+      ring.style.transform = `translate3d(${ringPos.current.x}px, ${ringPos.current.y}px, 0)`;
+    }
+
+    // Shatter logic
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        const mouse = mouseRef.current;
+        mouse.vX = mouse.x - mouse.prevX;
+        mouse.vY = mouse.y - mouse.prevY;
+        mouse.prevX = mouse.x;
+        mouse.prevY = mouse.y;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const vel = Math.sqrt(mouse.vX * mouse.vX + mouse.vY * mouse.vY);
+        if (vel > velocityThreshold && isVisible.current) {
+          particlesRef.current.push({
+            x: mouse.x,
+            y: mouse.y,
+            vx: (Math.random() - 0.5) * vel * 0.5,
+            vy: (Math.random() - 0.5) * vel * 0.5,
+            life: 1,
+            size: random(2, 8),
+            angle: random(0, 360),
+            spin: random(-5, 5),
+          });
+        }
+
+        for (let i = particlesRef.current.length - 1; i >= 0; i--) {
+          const p = particlesRef.current[i];
+          p.life -= 0.02;
+          p.x += p.vx;
+          p.y += p.vy + 1.5; // gravity
+          p.angle += p.spin;
+          if (p.life <= 0) {
+            particlesRef.current.splice(i, 1);
+            continue;
+          }
+
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.angle * Math.PI) / 180);
+          ctx.fillStyle = color.startsWith("#")
+              ? `rgba(${parseInt(color.slice(1, 3), 16)},${parseInt(color.slice(3, 5), 16)},${parseInt(color.slice(5, 7), 16)},${p.life})`
+              : `rgba(255,255,255,${p.life})`;
+          ctx.beginPath();
+          ctx.moveTo(0, -p.size);
+          ctx.lineTo(p.size, p.size);
+          ctx.lineTo(-p.size, p.size);
+          ctx.closePath();
+          ctx.fill();
+          ctx.restore();
+        }
+      }
+    }
 
     rafId.current = requestAnimationFrame(updateCursorVisualsLocal);
-  }, []);
+  }, [color, velocityThreshold]);
 
   useEffect(() => {
-    // Don't show custom cursor on touch devices
     if (typeof window === 'undefined') return;
     if (window.matchMedia('(pointer: coarse)').matches) return;
 
     const dot = dotRef.current;
     const ring = ringRef.current;
-    if (!dot || !ring) return;
+    const canvas = canvasRef.current;
+
+    let resizeHandler: () => void;
+    if (canvas) {
+      resizeHandler = () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      };
+      window.addEventListener('resize', resizeHandler);
+      resizeHandler();
+    }
 
     const handleMouseMove = (e: MouseEvent) => {
-      mousePos.current = { x: e.clientX, y: e.clientY };
+      mousePos.current.x = e.clientX;
+      mousePos.current.y = e.clientY;
+      mouseRef.current.x = e.clientX;
+      mouseRef.current.y = e.clientY;
       if (!isVisible.current) {
         isVisible.current = true;
-        dot.style.opacity = '1';
-        ring.style.opacity = '1';
+        if (dot) dot.style.opacity = '1';
+        if (ring) ring.style.opacity = '1';
       }
     };
 
     const handleMouseDown = () => {
       dotScale.current = 0.6;
-      ring.style.width = '26px';
-      ring.style.height = '26px';
-      ring.style.marginLeft = '-13px';
-      ring.style.marginTop = '-13px';
+      if (ring) {
+        ring.style.width = '26px';
+        ring.style.height = '26px';
+        ring.style.marginLeft = '-13px';
+        ring.style.marginTop = '-13px';
+      }
     };
 
     const handleMouseUp = () => {
       dotScale.current = 1.0;
-      ring.style.width = isHovering.current ? '48px' : '32px';
-      ring.style.height = isHovering.current ? '48px' : '32px';
-      ring.style.marginLeft = isHovering.current ? '-24px' : '-16px';
-      ring.style.marginTop = isHovering.current ? '-24px' : '-16px';
+      if (ring) {
+        ring.style.width = isHovering.current ? '48px' : '32px';
+        ring.style.height = isHovering.current ? '48px' : '32px';
+        ring.style.marginLeft = isHovering.current ? '-24px' : '-16px';
+        ring.style.marginTop = isHovering.current ? '-24px' : '-16px';
+      }
     };
 
     const handleMouseLeave = () => {
       isVisible.current = false;
-      dot.style.opacity = '0';
-      ring.style.opacity = '0';
+      if (dot) dot.style.opacity = '0';
+      if (ring) ring.style.opacity = '0';
     };
 
     const handleMouseEnter = () => {
       isVisible.current = true;
-      dot.style.opacity = '1';
-      ring.style.opacity = '1';
+      if (dot) dot.style.opacity = '1';
+      if (ring) ring.style.opacity = '1';
     };
 
     const onHoverIn = () => {
@@ -105,7 +189,6 @@ export default function CustomCursor() {
       }
     };
 
-    // Attach hover listeners using event delegation (no memory leak)
     const handlePointerOver = (e: PointerEvent) => {
       const target = e.target as HTMLElement;
       if (target.closest('a, button, [data-cursor-hover], input, textarea, select, [role="button"]')) {
@@ -138,12 +221,18 @@ export default function CustomCursor() {
       document.removeEventListener('mouseenter', handleMouseEnter);
       document.removeEventListener('pointerover', handlePointerOver);
       document.removeEventListener('pointerout', handlePointerOut);
+      if (resizeHandler) window.removeEventListener('resize', resizeHandler);
       cancelAnimationFrame(rafId.current);
     };
   }, [updateCursorVisuals]);
 
   return (
     <>
+      <canvas
+        ref={canvasRef}
+        className="fixed inset-0 pointer-events-none z-[99996] w-full h-full mix-blend-difference"
+      />
+
       {/* Inner dot */}
       <div
         ref={dotRef}
