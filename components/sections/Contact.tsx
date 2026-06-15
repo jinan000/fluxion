@@ -18,6 +18,34 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    const serviceLabels: { [key: string]: string } = {
+      customs: 'UAE Customs Clearance',
+      import: 'Import Clearance',
+      export: 'Export Clearance',
+      freight: 'Freight Forwarding',
+      container: 'Container Transportation',
+      gcc: 'GCC Cargo Movement',
+      oversized: 'Oversized Cargo Transport',
+      heavy: 'Heavy Equipment Transport',
+      project: 'Project Cargo Logistics',
+      'cross-border': 'Cross-Border Transport',
+    };
+    const selectedServiceLabel = serviceLabels[formData.service] || formData.service || 'N/A';
+
+    const subject = `Fluxion Cargo Enquiry - ${formData.name}`;
+    const body = `Dear Fluxion Team,\n\nI would like to request a quote / make an enquiry with the following details:\n\n` +
+      `- Full Name: ${formData.name}\n` +
+      `- Email: ${formData.email}\n` +
+      `- Phone Number: ${formData.phone || 'N/A'}\n` +
+      `- Company Name: ${formData.company || 'N/A'}\n` +
+      `- Service Required: ${selectedServiceLabel}\n\n` +
+      `Message / Requirements:\n${formData.message}\n\n` +
+      `Best regards,\n${formData.name}`;
+
+    const mailtoUrl = `mailto:info@fluxionuae.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoUrl;
+
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 4000);
   };
@@ -244,7 +272,7 @@ export default function Contact() {
 
               {/* Email */}
               <motion.a
-                href="mailto:INFO@FLUXIONUAE.COM"
+                href="mailto:info@fluxionuae.com"
                 className="p-6 rounded-2xl bg-white shadow-premium flex items-start gap-4 hover:shadow-premium-hover transition-shadow"
                 whileHover={{ x: 4 }}
                 data-cursor-hover
@@ -256,7 +284,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-heading font-semibold text-accent mb-1">Email</h4>
-                  <p className="text-sm text-primary font-medium">INFO@FLUXIONUAE.COM</p>
+                  <p className="text-sm text-primary font-medium">info@fluxionuae.com</p>
                   <p className="text-xs text-text-light mt-1">Response within 2 hours</p>
                 </div>
               </motion.a>
