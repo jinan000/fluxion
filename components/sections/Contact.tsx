@@ -15,6 +15,8 @@ export default function Contact() {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [mailtoUrl, setMailtoUrl] = useState('');
+  const [gmailUrl, setGmailUrl] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,11 +45,26 @@ export default function Contact() {
       `Message / Requirements:\n${formData.message}\n\n` +
       `Best regards,\n${formData.name}`;
 
-    const mailtoUrl = `mailto:info@fluxionuae.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailtoUrl;
+    const mailto = `mailto:info@fluxionuae.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const gmail = `https://mail.google.com/mail/?view=cm&fs=1&to=info@fluxionuae.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+    setMailtoUrl(mailto);
+    setGmailUrl(gmail);
+    window.location.href = mailto;
 
     setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
+  };
+
+  const handleReset = () => {
+    setSubmitted(false);
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      company: '',
+      service: '',
+      message: '',
+    });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -83,15 +100,60 @@ export default function Contact() {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="text-center py-12"
+                  className="text-center py-8"
                 >
                   <div className="w-16 h-16 mx-auto rounded-full gradient-primary flex items-center justify-center mb-4">
                     <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h3 className="text-xl font-heading font-bold text-accent mb-2">Request Received!</h3>
-                  <p className="text-text-light">Our team will contact you within 2 hours.</p>
+                  <h3 className="text-2xl font-heading font-bold text-accent mb-2">Email Drafted!</h3>
+                  <p className="text-text-light mb-6">
+                    We have initiated your default mail client with the enquiry details.
+                  </p>
+                  
+                  <div className="bg-bg-soft rounded-2xl p-6 max-w-md mx-auto text-sm border border-gray-100 space-y-4 mb-6">
+                    <p className="text-accent font-semibold">If the mail client did not open automatically:</p>
+                    
+                    <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                      <a
+                        href={gmailUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-2.5 bg-[#EA4335] text-white font-medium rounded-xl hover:bg-[#d93025] transition-colors inline-flex items-center justify-center gap-2 shadow-sm"
+                        data-cursor-hover
+                      >
+                        <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                          <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                        Open Gmail Web
+                      </a>
+                      
+                      <a
+                        href={mailtoUrl}
+                        className="px-4 py-2.5 bg-white border border-gray-200 hover:bg-gray-50 text-accent font-medium rounded-xl transition-colors inline-flex items-center justify-center gap-2 shadow-sm"
+                        data-cursor-hover
+                      >
+                        Retry Mail Client
+                      </a>
+                    </div>
+                    
+                    <p className="text-xs text-text-light/85 mt-2">
+                      Or copy and send details manually to:{' '}
+                      <span className="font-mono bg-white px-2 py-0.5 rounded border border-gray-200 text-accent font-medium">
+                        info@fluxionuae.com
+                      </span>
+                    </p>
+                  </div>
+
+                  <button
+                    onClick={handleReset}
+                    type="button"
+                    className="text-sm font-semibold text-primary hover:underline"
+                    data-cursor-hover
+                  >
+                    Send Another Enquiry
+                  </button>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -220,7 +282,7 @@ export default function Contact() {
                     </label>
                   </div>
 
-                  <MagneticButton variant="primary" size="lg">
+                  <MagneticButton variant="primary" size="lg" type="submit">
                     Submit Request
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -235,21 +297,26 @@ export default function Contact() {
           <SectionReveal direction="right" className="lg:col-span-2">
             <div className="space-y-6">
               {/* Location */}
-              <div className="p-6 rounded-2xl bg-white shadow-premium">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center text-white flex-shrink-0">
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 className="font-heading font-semibold text-accent mb-1">Headquarters</h4>
-                    <p className="text-sm text-text-light">Sharjah, United Arab Emirates</p>
-                    <p className="text-xs text-text-light mt-1">Serving the entire GCC region</p>
-                  </div>
+              <motion.a
+                href="https://maps.app.goo.gl/X296Ax1kVbPsJqYg6?g_st=aw"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-6 rounded-2xl bg-white shadow-premium flex items-start gap-4 hover:shadow-premium-hover transition-shadow"
+                whileHover={{ x: 4 }}
+                data-cursor-hover
+              >
+                <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center text-white flex-shrink-0">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                  </svg>
                 </div>
-              </div>
+                <div>
+                  <h4 className="font-heading font-semibold text-accent mb-1">Headquarters</h4>
+                  <p className="text-sm text-text-light">Sharjah, United Arab Emirates</p>
+                  <p className="text-xs text-text-light mt-1">Serving the entire GCC region</p>
+                </div>
+              </motion.a>
 
               {/* Phone */}
               <motion.a
@@ -311,15 +378,22 @@ export default function Contact() {
               </motion.a>
 
               {/* Map placeholder */}
-              <div className="rounded-2xl overflow-hidden h-48 bg-gradient-to-br from-bg-soft to-primary/5 border border-gray-200 flex items-center justify-center">
+              <motion.a
+                href="https://maps.app.goo.gl/X296Ax1kVbPsJqYg6?g_st=aw"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-2xl overflow-hidden h-48 bg-gradient-to-br from-bg-soft to-primary/5 border border-gray-200 flex items-center justify-center hover:border-primary/30 transition-colors"
+                whileHover={{ scale: 1.01 }}
+                data-cursor-hover
+              >
                 <div className="text-center">
                   <svg className="w-8 h-8 text-primary/30 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
                   </svg>
-                  <p className="text-sm text-text-light">Google Maps</p>
+                  <p className="text-sm text-text-light font-medium">Google Maps</p>
                   <p className="text-xs text-text-light/60">Sharjah, UAE</p>
                 </div>
-              </div>
+              </motion.a>
             </div>
           </SectionReveal>
         </div>
