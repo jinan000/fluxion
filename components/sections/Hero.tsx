@@ -38,7 +38,11 @@ export default function Hero() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    let lastWidth = window.innerWidth;
     const resize = () => {
+      // Only resize canvas backing store if width changes (prevents mobile address bar lag)
+      if (window.innerWidth === lastWidth && canvas.width !== 0) return;
+      lastWidth = window.innerWidth;
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
@@ -62,7 +66,22 @@ export default function Hero() {
       toNode: Math.floor(Math.random() * nodes.length),
     }));
 
+    let isVisible = true;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+      },
+      { threshold: 0.01 }
+    );
+    observer.observe(canvas.parentElement || canvas);
+
     const animate = () => {
+      // Completely bypass rendering if section is out of view
+      if (!isVisible) {
+        frameId = requestAnimationFrame(animate);
+        return;
+      }
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Update node positions
@@ -125,13 +144,14 @@ export default function Hero() {
         ctx.fill();
       });
 
-      requestAnimationFrame(animate);
+      frameId = requestAnimationFrame(animate);
     };
 
-    const frame = requestAnimationFrame(animate);
+    let frameId = requestAnimationFrame(animate);
     return () => {
-      cancelAnimationFrame(frame);
+      cancelAnimationFrame(frameId);
       window.removeEventListener('resize', resize);
+      observer.disconnect();
     };
   }, []);
 

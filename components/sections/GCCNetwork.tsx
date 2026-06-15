@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SectionReveal from '../ui/SectionReveal';
 import { Globe } from '../ui/globe';
+import { DottedMap } from '../ui/dotted-map';
 
 interface Country {
   id: string;
@@ -25,6 +26,16 @@ const countries: Country[] = [
 
 export default function GCCNetwork() {
   const [activeCountry, setActiveCountry] = useState<Country | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const toggleCountry = useCallback((country: Country) => {
     setActiveCountry(prev => prev?.id === country.id ? null : country);
@@ -44,6 +55,17 @@ export default function GCCNetwork() {
           : (c.id === 'uae' ? 0.08 : 0.05),
       })),
     };
+  }, [activeCountry]);
+
+  // Markers configuration for the lightweight SVG DottedMap
+  const dottedMapMarkers = useMemo(() => {
+    return countries.map((c) => ({
+      lat: c.lat,
+      lng: c.lng,
+      size: activeCountry?.id === c.id ? 0.8 : 0.4,
+      pulse: activeCountry?.id === c.id,
+      label: c.name,
+    }));
   }, [activeCountry]);
 
   return (
@@ -66,33 +88,41 @@ export default function GCCNetwork() {
             </h2>
             <p className="text-white/50 text-lg max-w-2xl mx-auto">
               Our logistics network spans all six GCC nations, providing seamless cargo
-              movement with dedicated routes and local expertise.
+               movement with dedicated routes and local expertise.
             </p>
           </div>
         </SectionReveal>
-
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
-          {/* Interactive Globe Container */}
-          <SectionReveal direction="left" className="lg:col-span-3">
-            <div className="relative w-full aspect-square max-h-[500px] md:max-h-[550px] lg:max-h-[600px] overflow-hidden flex items-center justify-center">
-              {/* The 3D Globe Component */}
-              <Globe 
-                className="z-0"
-                activeLocation={activeLocation}
-                config={globeConfig}
-              />
-
-              {/* Interactive Help Hint Overlay */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-accent/80 backdrop-blur-md border border-white/10 px-4 py-1.5 rounded-full z-20 pointer-events-none flex items-center gap-2">
-                <svg className="w-4 h-4 text-secondary animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
-                </svg>
-                <span className="text-[10px] tracking-wider text-white/70 uppercase font-medium">
-                  {activeCountry ? `${activeCountry.name} Selected` : 'Drag to rotate globe'}
-                </span>
-              </div>
-            </div>
-          </SectionReveal>
+ 
+         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
+           {/* Interactive Globe / Map Container */}
+           <SectionReveal direction="left" className="lg:col-span-3">
+             <div className="relative w-full aspect-square max-h-[500px] md:max-h-[550px] lg:max-h-[600px] overflow-hidden flex items-center justify-center">
+              {isMobile ? (
+                <DottedMap 
+                  markers={dottedMapMarkers}
+                  dotColor="rgba(255, 255, 255, 0.15)"
+                  markerColor="#0098A6"
+                  className="w-full h-full p-4 z-0"
+                />
+              ) : (
+                <Globe 
+                  className="z-0"
+                  activeLocation={activeLocation}
+                  config={globeConfig}
+                />
+              )}
+ 
+               {/* Interactive Help Hint Overlay */}
+               <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-accent/80 backdrop-blur-md border border-white/10 px-4 py-1.5 rounded-full z-20 pointer-events-none flex items-center gap-2">
+                 <svg className="w-4 h-4 text-secondary animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                 </svg>
+                 <span className="text-[10px] tracking-wider text-white/70 uppercase font-medium">
+                   {isMobile ? (activeCountry ? `${activeCountry.name} Selected` : 'Tap a country below to locate') : (activeCountry ? `${activeCountry.name} Selected` : 'Drag to rotate globe')}
+                 </span>
+               </div>
+             </div>
+           </SectionReveal>
 
           {/* Country Info Panel */}
           <SectionReveal direction="right" className="lg:col-span-2">
