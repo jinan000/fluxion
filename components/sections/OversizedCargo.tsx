@@ -15,7 +15,7 @@ const capabilities = [
 export default function OversizedCargo() {
   return (
     <section className="section-padding bg-bg-soft relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-primary/3 rounded-full blur-[150px]" />
+      <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-primary/3 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">

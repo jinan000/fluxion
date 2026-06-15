@@ -25,8 +25,8 @@ export default function About() {
   return (
     <section id="about" className="section-padding bg-bg-soft relative overflow-hidden">
       {/* Decorative elements */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/3 rounded-full blur-[120px]" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary/3 rounded-full blur-[100px]" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/3 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary/3 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative">
         {/* Section Header */}

@@ -236,7 +236,7 @@ export default function Fleet() {
 
   return (
     <section id="fleet" className="section-padding bg-white relative overflow-hidden">
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-primary/3 rounded-full blur-[120px]" />
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-primary/3 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative">
         <SectionReveal>

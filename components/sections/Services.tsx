@@ -103,8 +103,8 @@ export default function Services() {
   return (
     <section id="services" className="section-padding bg-white relative overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute top-20 left-0 w-72 h-72 bg-primary/3 rounded-full blur-[100px]" />
-      <div className="absolute bottom-20 right-0 w-96 h-96 bg-accent/3 rounded-full blur-[120px]" />
+      <div className="absolute top-20 left-0 w-72 h-72 bg-primary/3 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-20 right-0 w-96 h-96 bg-accent/3 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative">
         {/* Header */}

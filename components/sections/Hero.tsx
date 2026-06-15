@@ -1,12 +1,34 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import MagneticButton from '../ui/MagneticButton';
 import Image from 'next/image';
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isMobileRatio, setIsMobileRatio] = useState(false);
+
+  // Aspect-ratio detection for mobile 9:16 video
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mediaQuery = window.matchMedia('(max-aspect-ratio: 9/16)');
+
+    const handler = (e: MediaQueryListEvent | MediaQueryList) => {
+      setIsMobileRatio(e.matches);
+    };
+
+    // Defer the initial check to prevent synchronous state changes during mounting
+    const timer = setTimeout(() => {
+      handler(mediaQuery);
+    }, 0);
+
+    mediaQuery.addEventListener('change', handler);
+    return () => {
+      clearTimeout(timer);
+      mediaQuery.removeEventListener('change', handler);
+    };
+  }, []);
 
   // Animated route lines on canvas
   useEffect(() => {
@@ -122,13 +144,14 @@ export default function Hero() {
       {/* Background Video */}
       <div className="absolute inset-0">
         <video
+          key={isMobileRatio ? 'mobile' : 'desktop'}
           autoPlay
           loop
           muted
           playsInline
           className="w-full h-full object-cover"
         >
-          <source src="/images/video.mp4" type="video/mp4" />
+          <source src={isMobileRatio ? "/images/mob_video.mp4" : "/images/video.mp4"} type="video/mp4" />
         </video>
         {/* Small light overlay gradient for readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/20 to-white/40" />

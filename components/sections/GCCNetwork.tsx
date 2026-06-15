@@ -49,7 +49,7 @@ export default function GCCNetwork() {
   return (
     <section id="network" className="section-padding bg-gradient-to-br from-accent to-[#0D2340] relative overflow-hidden">
       {/* Background effects */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-[80px]" />
         <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-primary/5 rounded-full blur-[60px]" />
       </div>

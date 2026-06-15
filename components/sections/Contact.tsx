@@ -73,7 +73,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="section-padding bg-bg-soft relative overflow-hidden">
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-primary/3 rounded-full blur-[120px]" />
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-primary/3 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative">
         <SectionReveal>
@@ -377,23 +377,34 @@ export default function Contact() {
                 </div>
               </motion.a>
 
-              {/* Map placeholder */}
-              <motion.a
-                href="https://maps.app.goo.gl/X296Ax1kVbPsJqYg6?g_st=aw"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block rounded-2xl overflow-hidden h-48 bg-gradient-to-br from-bg-soft to-primary/5 border border-gray-200 flex items-center justify-center hover:border-primary/30 transition-colors"
-                whileHover={{ scale: 1.01 }}
-                data-cursor-hover
-              >
-                <div className="text-center">
-                  <svg className="w-8 h-8 text-primary/30 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
+              {/* Google Maps Satellite Embed */}
+              <div className="rounded-2xl overflow-hidden h-64 border border-gray-200 shadow-premium relative group">
+                <iframe
+                  src="https://maps.google.com/maps?q=25.277525,55.680447&t=k&z=16&output=embed&iwloc=near"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen={false}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="FLUXION Headquarters Location"
+                  className="w-full h-full object-cover filter contrast-[1.05] saturate-[1.1]"
+                />
+                
+                {/* Floating "View on Google Maps" Overlay Badge */}
+                <a
+                  href="https://maps.app.goo.gl/X296Ax1kVbPsJqYg6?g_st=aw"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute bottom-4 right-4 bg-accent/90 backdrop-blur-md text-white px-4 py-2 rounded-xl text-xs font-semibold hover:bg-primary transition-colors flex items-center gap-1.5 shadow-lg border border-white/10"
+                  data-cursor-hover
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
-                  <p className="text-sm text-text-light font-medium">Google Maps</p>
-                  <p className="text-xs text-text-light/60">Sharjah, UAE</p>
-                </div>
-              </motion.a>
+                  Open in Google Maps
+                </a>
+              </div>
             </div>
           </SectionReveal>
         </div>
