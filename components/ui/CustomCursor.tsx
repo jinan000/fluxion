@@ -1,125 +1,219 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import { motion, useSpring } from 'framer-motion';
 
+interface DefaultCursorSVGProps {
+  invertColors: boolean;
+}
+
+// --- Default Cursor Icon from Framer ---
+const DefaultCursorSVG = ({ invertColors }: DefaultCursorSVGProps) => {
+  const innerColor = invertColors ? 'white' : 'black';
+  const outerColor = invertColors ? 'black' : 'white';
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="100%"
+      height="100%"
+      viewBox="0 0 50 54"
+      fill="none"
+    >
+      <g filter="url(#filter0_d_91_7928)">
+        <path
+          d="M42.6817 41.1495L27.5103 6.79925C26.7269 5.02557 24.2082 5.02558 23.3927 6.79925L7.59814 41.1495C6.75833 42.9759 8.52712 44.8902 10.4125 44.1954L24.3757 39.0496C24.8829 38.8627 25.4385 38.8627 25.9422 39.0496L39.8121 44.1954C41.6849 44.8902 43.4884 42.9759 42.6817 41.1495Z"
+          fill={innerColor}
+        />
+        <path
+          d="M43.7146 40.6933L28.5431 6.34306C27.3556 3.65428 23.5772 3.69516 22.3668 6.32755L6.57226 40.6778C5.3134 43.4156 7.97238 46.298 10.803 45.2549L24.7662 40.109C25.0221 40.0147 25.2999 40.0156 25.5494 40.1082L39.4193 45.254C42.2261 46.2953 44.9254 43.4347 43.7146 40.6933Z"
+          stroke={outerColor}
+          strokeWidth="2.25825"
+        />
+      </g>
+      <defs>
+        <filter
+          id="filter0_d_91_7928"
+          x={0.602397}
+          y={0.952444}
+          width={49.0584}
+          height={52.428}
+          filterUnits="userSpaceOnUse"
+          colorInterpolationFilters="sRGB"
+        >
+          <feFlood floodOpacity={0} result="BackgroundImageFix" />
+          <feColorMatrix
+            in="SourceAlpha"
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            result="hardAlpha"
+          />
+          <feOffset dy={2.25825} />
+          <feGaussianBlur stdDeviation={2.25825} />
+          <feComposite in2="hardAlpha" operator="out" />
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0"
+          />
+          <feBlend
+            mode="normal"
+            in2="BackgroundImageFix"
+            result="effect1_dropShadow_91_7928"
+          />
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="effect1_dropShadow_91_7928"
+            result="shape"
+          />
+        </filter>
+      </defs>
+    </svg>
+  );
+};
+
+// --- CustomCursor / SmoothCursor ---
 export default function CustomCursor() {
-  const [isMobileDevice, setIsMobileDevice] = useState(true);
-  const dotRef = useRef<HTMLDivElement>(null);
-  const ringRef = useRef<HTMLDivElement>(null);
+  // Configurable parameters derived from Framer's Smoothcursor defaults
+  const stiffness = 400;
+  const damping = 45;
+  const mass = 1;
+  const cursorSize = 28; // Sleeker size for web UI
+  const enableBlendMode = true;
+  const invertIconColors = true;
+  const enableClickEffect = true;
 
-  const mousePos = useRef({ x: -100, y: -100 });
-  const ringPos = useRef({ x: -100, y: -100 });
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Framer motion springs for smooth physics
+  const cursorX = useSpring(-100, { stiffness, damping, mass });
+  const cursorY = useSpring(-100, { stiffness, damping, mass });
+  const rotation = useSpring(0, { stiffness: 300, damping: 60 });
+  const scale = useSpring(1, { stiffness: 500, damping: 35 });
+
+  // Refs for tracking mouse state and velocity
+  const lastMousePos = useRef({ x: 0, y: 0 });
+  const velocity = useRef({ x: 0, y: 0 });
+  const lastUpdateTime = useRef(Date.now());
+  const previousAngle = useRef(0);
+  const accumulatedRotation = useRef(0);
+  const rafId = useRef<number | null>(null);
+  const isMouseDown = useRef(false);
   const isHovering = useRef(false);
-  const isVisible = useRef(false);
-  const dotScale = useRef(1);
-  const rafId = useRef<number>(0);
+  const squishTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  // 1. Check constraints: Disable custom cursor on mobile / portrait / touch devices
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    
-    // Check if device is touch-enabled / mobile
-    const mobileQuery = window.matchMedia('(pointer: coarse)');
-    setIsMobileDevice(mobileQuery.matches);
-    
-    if (mobileQuery.matches) return;
 
-    const dot = dotRef.current;
-    const ring = ringRef.current;
-
-    // 1. Snappy Dot: Follows mouse INSTANTLY in mousemove event to eliminate "spongy/laggy" feel
-    const handleMouseMove = (e: MouseEvent) => {
-      mousePos.current.x = e.clientX;
-      mousePos.current.y = e.clientY;
+    const checkDeviceConstraints = () => {
+      const isPortrait = window.innerHeight > window.innerWidth;
+      const isMobileWidth = window.innerWidth < 768;
+      const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
       
-      if (dot) {
-        dot.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) scale(${dotScale.current})`;
-      }
-
-      if (!isVisible.current) {
-        isVisible.current = true;
-        if (dot) dot.style.opacity = '1';
-        if (ring) ring.style.opacity = '1';
+      if (isPortrait || isMobileWidth || isTouch) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
       }
     };
 
-    // 2. Smooth Ring: Continues using animation frame interpolation for fluid trailing effect
-    const updateRing = () => {
-      const dx = mousePos.current.x - ringPos.current.x;
-      const dy = mousePos.current.y - ringPos.current.y;
-      ringPos.current.x += dx * 0.15;
-      ringPos.current.y += dy * 0.15;
+    checkDeviceConstraints();
+    window.addEventListener('resize', checkDeviceConstraints);
+    return () => window.removeEventListener('resize', checkDeviceConstraints);
+  }, []);
 
-      if (ring) {
-        ring.style.transform = `translate3d(${ringPos.current.x}px, ${ringPos.current.y}px, 0)`;
+  // 2. Main cursor movements, calculations, and click/hover logic
+  useEffect(() => {
+    if (typeof window === 'undefined' || !isVisible) {
+      document.body.style.cursor = 'auto';
+      return;
+    }
+
+    const updateVelocity = (currentPos: { x: number; y: number }) => {
+      const currentTime = Date.now();
+      const deltaTime = currentTime - lastUpdateTime.current;
+      if (deltaTime > 0) {
+        velocity.current = {
+          x: (currentPos.x - lastMousePos.current.x) / deltaTime,
+          y: (currentPos.y - lastMousePos.current.y) / deltaTime,
+        };
       }
-
-      rafId.current = requestAnimationFrame(updateRing);
+      lastUpdateTime.current = currentTime;
+      lastMousePos.current = currentPos;
     };
 
+    const smoothMouseMove = (e: MouseEvent) => {
+      const currentPos = { x: e.clientX, y: e.clientY };
+      updateVelocity(currentPos);
+      
+      const speed = Math.sqrt(
+        Math.pow(velocity.current.x, 2) + Math.pow(velocity.current.y, 2)
+      );
+
+      cursorX.set(currentPos.x);
+      cursorY.set(currentPos.y);
+
+      // If the mouse is moving above a tiny speed threshold, calculate rotation angle
+      if (speed > 0.1) {
+        const currentAngle =
+          Math.atan2(velocity.current.y, velocity.current.x) * (180 / Math.PI) + 90;
+        let angleDiff = currentAngle - previousAngle.current;
+        
+        // Handle wrap-around of angles to avoid sudden 360-degree spins
+        if (angleDiff > 180) angleDiff -= 360;
+        if (angleDiff < -180) angleDiff += 360;
+        
+        accumulatedRotation.current += angleDiff;
+        rotation.set(accumulatedRotation.current);
+        previousAngle.current = currentAngle;
+
+        // Apply movement squish if not clicked and not hovering over an interactive element
+        if (enableClickEffect && !isMouseDown.current && !isHovering.current) {
+          scale.set(0.95);
+          if (squishTimeoutRef.current) {
+            clearTimeout(squishTimeoutRef.current);
+          }
+          squishTimeoutRef.current = setTimeout(() => {
+            if (!isMouseDown.current && !isHovering.current) {
+              scale.set(1);
+            }
+          }, 150);
+        }
+      }
+    };
+
+    const throttledMouseMove = (e: MouseEvent) => {
+      if (rafId.current) return;
+      rafId.current = requestAnimationFrame(() => {
+        smoothMouseMove(e);
+        rafId.current = null;
+      });
+    };
+
+    // Click squish effects
     const handleMouseDown = () => {
-      dotScale.current = 0.6;
-      if (dot) {
-        dot.style.transform = `translate3d(${mousePos.current.x}px, ${mousePos.current.y}px, 0) scale(0.6)`;
-      }
-      if (ring) {
-        ring.style.width = '24px';
-        ring.style.height = '24px';
-        ring.style.marginLeft = '-12px';
-        ring.style.marginTop = '-12px';
+      isMouseDown.current = true;
+      if (enableClickEffect) {
+        scale.set(0.7);
       }
     };
 
     const handleMouseUp = () => {
-      dotScale.current = 1.0;
-      if (dot) {
-        dot.style.transform = `translate3d(${mousePos.current.x}px, ${mousePos.current.y}px, 0) scale(1.0)`;
-      }
-      if (ring) {
-        ring.style.width = isHovering.current ? '48px' : '32px';
-        ring.style.height = isHovering.current ? '48px' : '32px';
-        ring.style.marginLeft = isHovering.current ? '-24px' : '-16px';
-        ring.style.marginTop = isHovering.current ? '-24px' : '-16px';
+      isMouseDown.current = false;
+      if (enableClickEffect) {
+        scale.set(isHovering.current ? 1.35 : 1.0);
       }
     };
 
-    const handleMouseLeave = () => {
-      isVisible.current = false;
-      if (dot) dot.style.opacity = '0';
-      if (ring) ring.style.opacity = '0';
-    };
-
-    const handleMouseEnter = () => {
-      isVisible.current = true;
-      if (dot) dot.style.opacity = '1';
-      if (ring) ring.style.opacity = '1';
-    };
-
+    // Hover Scaling & Accentuation
     const onHoverIn = () => {
       isHovering.current = true;
-      if (ring) {
-        ring.style.width = '48px';
-        ring.style.height = '48px';
-        ring.style.marginLeft = '-24px';
-        ring.style.marginTop = '-24px';
-        ring.style.background = 'rgba(255, 255, 255, 0.15)';
-      }
-      if (dot) {
-        dot.children[0]?.classList.add('scale-125');
-      }
+      scale.set(1.35);
     };
 
     const onHoverOut = () => {
       isHovering.current = false;
-      if (ring) {
-        ring.style.width = '32px';
-        ring.style.height = '32px';
-        ring.style.marginLeft = '-16px';
-        ring.style.marginTop = '-16px';
-        ring.style.background = 'transparent';
-      }
-      if (dot) {
-        dot.children[0]?.classList.remove('scale-125');
-      }
+      scale.set(isMouseDown.current ? 0.7 : 1.0);
     };
 
     const handlePointerOver = (e: PointerEvent) => {
@@ -136,61 +230,52 @@ export default function CustomCursor() {
       }
     };
 
-    document.addEventListener('mousemove', handleMouseMove, { passive: true });
-    document.addEventListener('mousedown', handleMouseDown);
-    document.addEventListener('mouseup', handleMouseUp);
-    document.addEventListener('mouseleave', handleMouseLeave);
-    document.addEventListener('mouseenter', handleMouseEnter);
+    // Listeners
+    window.addEventListener('mousemove', throttledMouseMove);
+    window.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mouseup', handleMouseUp);
+    window.addEventListener('mouseleave', handleMouseUp); // Failsafe
     document.addEventListener('pointerover', handlePointerOver, { passive: true });
     document.addEventListener('pointerout', handlePointerOut, { passive: true });
 
-    rafId.current = requestAnimationFrame(updateRing);
-
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mousedown', handleMouseDown);
-      document.removeEventListener('mouseup', handleMouseUp);
-      document.removeEventListener('mouseleave', handleMouseLeave);
-      document.removeEventListener('mouseenter', handleMouseEnter);
+      window.removeEventListener('mousemove', throttledMouseMove);
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('mouseleave', handleMouseUp);
       document.removeEventListener('pointerover', handlePointerOver);
       document.removeEventListener('pointerout', handlePointerOut);
-      cancelAnimationFrame(rafId.current);
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+      if (squishTimeoutRef.current) clearTimeout(squishTimeoutRef.current);
     };
-  }, []);
+  }, [cursorX, cursorY, rotation, scale, isVisible, enableClickEffect]);
 
-  if (isMobileDevice) return null;
+  if (!isVisible) return null;
 
   return (
-    <>
-      {/* Inner dot */}
-      <div
-        ref={dotRef}
-        className="fixed top-0 left-0 pointer-events-none z-[99998] opacity-0 mix-blend-difference"
-        style={{ willChange: 'transform', transition: 'opacity 0.3s' }}
-      >
-        <div
-          className="w-[8px] h-[8px] rounded-full bg-white transition-transform duration-150"
-          style={{ marginLeft: '-4px', marginTop: '-4px' }}
-        />
-      </div>
-
-      {/* Outer ring */}
-      <div
-        ref={ringRef}
-        className="fixed top-0 left-0 pointer-events-none z-[99997] opacity-0 rounded-full mix-blend-difference"
-        style={{
-          willChange: 'transform',
-          transition: 'width 0.3s ease, height 0.3s ease, margin 0.3s ease, opacity 0.3s, background 0.3s',
-          width: '32px',
-          height: '32px',
-          marginLeft: '-16px',
-          marginTop: '-16px',
-          borderColor: 'white',
-          borderStyle: 'solid',
-          borderWidth: '1px',
-          background: 'transparent',
-        }}
-      />
-    </>
+    <motion.div
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        x: cursorX,
+        y: cursorY,
+        rotate: rotation,
+        scale: scale,
+        zIndex: 999999,
+        pointerEvents: 'none',
+        willChange: 'transform',
+        mixBlendMode: enableBlendMode ? 'difference' : 'normal',
+        width: cursorSize,
+        height: cursorSize,
+        marginLeft: -cursorSize / 2,
+        marginTop: -cursorSize / 2,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <DefaultCursorSVG invertColors={invertIconColors} />
+    </motion.div>
   );
 }
