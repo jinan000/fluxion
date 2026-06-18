@@ -67,7 +67,7 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="section-padding bg-gradient-to-br from-accent to-[#0D2340] relative overflow-hidden">
+    <section className="section-padding bg-gradient-to-br from-accent to-[#0D2340] relative overflow-hidden" aria-label="FLUXION Logistics Client Testimonials and Reviews">
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px]" />

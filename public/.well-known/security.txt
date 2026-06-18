@@ -1,0 +1,3 @@
+Contact: info@fluxionuae.com
+Preferred-Languages: en, ar
+Canonical: https://fluxionuae.com/.well-known/security.txt

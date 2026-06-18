@@ -14,7 +14,7 @@ const capabilities = [
 
 export default function OversizedCargo() {
   return (
-    <section className="section-padding bg-bg-soft relative overflow-hidden">
+    <section className="section-padding bg-bg-soft relative overflow-hidden" aria-label="FLUXION Oversized and Heavy Cargo Transport - Low Bed Trailer and Heavy Equipment Transport UAE">
       <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-primary/3 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative">
@@ -74,7 +74,7 @@ export default function OversizedCargo() {
               <div className="rounded-2xl overflow-hidden shadow-premium-lg h-[480px] relative">
                 <Image
                   src="/images/oversized-cargo.png"
-                  alt="Oversized cargo transportation"
+                  alt="FLUXION oversized cargo and heavy equipment transportation service in UAE - Low bed trailer carrying industrial machinery"
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 50vw"

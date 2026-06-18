@@ -72,7 +72,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="section-padding bg-bg-soft relative overflow-hidden">
+    <section id="contact" className="section-padding bg-bg-soft relative overflow-hidden" aria-label="Contact FLUXION Logistics - Request a Quote for Customs Clearance and Freight Forwarding in UAE">
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-primary/3 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative">

@@ -56,7 +56,8 @@ const socialLinks = [
 ];
 
 export default function Footer() {
-  const scrollTo = (href: string) => {
+  const handleScrollClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
     const el = document.querySelector(href);
     el?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -112,46 +113,48 @@ export default function Footer() {
 
           {/* Quick Links */}
           <SectionReveal direction="up" delay={0.1}>
-            <div>
+            <nav aria-label="Quick Links">
               <h4 className="text-sm font-heading font-semibold tracking-wider text-accent uppercase mb-6">
                 Quick Links
               </h4>
               <ul className="space-y-3">
                 {quickLinks.map((link) => (
                   <li key={link.label}>
-                    <button
-                      onClick={() => scrollTo(link.href)}
+                    <a
+                      href={`/${link.href}`}
+                      onClick={(e) => handleScrollClick(e, link.href)}
                       className="text-sm text-text-light hover:text-primary transition-colors duration-300"
                       data-cursor-hover
                     >
                       {link.label}
-                    </button>
+                    </a>
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
           </SectionReveal>
 
           {/* Services */}
           <SectionReveal direction="up" delay={0.2}>
-            <div>
+            <nav aria-label="Services">
               <h4 className="text-sm font-heading font-semibold tracking-wider text-accent uppercase mb-6">
                 Services
               </h4>
               <ul className="space-y-3">
                 {services.map((service) => (
                   <li key={service}>
-                    <button
-                      onClick={() => scrollTo('#services')}
+                    <a
+                      href="/#services"
+                      onClick={(e) => handleScrollClick(e, '#services')}
                       className="text-sm text-text-light hover:text-primary transition-colors duration-300"
                       data-cursor-hover
                     >
                       {service}
-                    </button>
+                    </a>
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
           </SectionReveal>
 
           {/* GCC Network & Newsletter */}

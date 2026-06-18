@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 interface GlassCardProps {
   children: React.ReactNode;
   className?: string;
+  id?: string;
   hover?: boolean;
   tilt?: boolean;
   glowColor?: string;
@@ -14,6 +15,7 @@ interface GlassCardProps {
 export default function GlassCard({
   children,
   className = '',
+  id,
   hover = true,
   tilt = true,
   glowColor = 'rgba(27, 77, 84, 0.15)',
@@ -44,6 +46,7 @@ export default function GlassCard({
   return (
     <motion.div
       ref={cardRef}
+      id={id}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       animate={{

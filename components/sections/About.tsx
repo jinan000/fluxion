@@ -23,7 +23,7 @@ const milestones = [
 
 export default function About() {
   return (
-    <section id="about" className="section-padding bg-bg-soft relative overflow-hidden">
+    <section id="about" className="section-padding bg-bg-soft relative overflow-hidden" aria-label="About Fluxion Logistics - Your Trusted GCC Logistics Partner">
       {/* Decorative elements */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/3 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary/3 rounded-full blur-[100px] pointer-events-none" />
@@ -53,7 +53,7 @@ export default function About() {
             <div className="relative rounded-2xl overflow-hidden shadow-premium-lg h-[440px]">
               <Image
                 src="/images/about.png"
-                alt="Fluxion Operations Center in Sharjah"
+                alt="FLUXION Logistics Operations Center in Sharjah UAE - Customs clearance and freight forwarding headquarters"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"

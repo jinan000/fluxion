@@ -101,7 +101,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="section-padding bg-white relative overflow-hidden">
+    <section id="services" className="section-padding bg-white relative overflow-hidden" aria-label="FLUXION Logistics Services - Customs Clearance, Freight Forwarding, Container Transportation">
       {/* Background decoration */}
       <div className="absolute top-20 left-0 w-72 h-72 bg-primary/3 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-20 right-0 w-96 h-96 bg-accent/3 rounded-full blur-[120px] pointer-events-none" />
@@ -128,7 +128,7 @@ export default function Services() {
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5" stagger={0.08}>
           {services.map((service, i) => (
             <StaggerItem key={service.title}>
-              <GlassCard className="h-full group">
+              <GlassCard className="h-full group" id={`service-${service.title.toLowerCase().replace(/\s+/g, '-')}`}>
                 <div className="p-6">
                   {/* Icon */}
                   <div className="w-14 h-14 rounded-xl gradient-primary flex items-center justify-center text-white mb-5 group-hover:scale-110 transition-transform duration-500">

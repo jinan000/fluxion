@@ -26,7 +26,8 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollTo = (href: string) => {
+  const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
     setMobileOpen(false);
     const el = document.querySelector(href);
     el?.scrollIntoView({ behavior: 'smooth' });
@@ -43,6 +44,7 @@ export default function Navbar() {
             ? 'py-2 glass-light shadow-premium'
             : 'py-3 bg-transparent'
         }`}
+        aria-label="Main Navigation"
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
@@ -67,16 +69,17 @@ export default function Navbar() {
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
-              <button
+              <a
                 key={link.label}
-                onClick={() => scrollTo(link.href)}
+                href={`/${link.href}`}
+                onClick={(e) => scrollTo(e, link.href)}
                 className={`px-4 py-2 text-sm font-medium tracking-wide rounded-full transition-all duration-300 hover:bg-primary/10 ${
                   scrolled ? 'text-text hover:text-primary' : 'text-text-light hover:text-primary'
                 }`}
                 data-cursor-hover
               >
                 {link.label}
-              </button>
+              </a>
             ))}
           </div>
 
@@ -85,7 +88,9 @@ export default function Navbar() {
             <MagneticButton
               variant="primary"
               size="sm"
-              onClick={() => scrollTo('#contact')}
+              onClick={() => {
+                document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+              }}
             >
               Request Quote
             </MagneticButton>
@@ -137,24 +142,28 @@ export default function Navbar() {
               className="flex flex-col items-center gap-6"
             >
               {navLinks.map((link, i) => (
-                <motion.button
+                <motion.a
                   key={link.label}
+                  href={`/${link.href}`}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
                   transition={{ delay: 0.05 * i }}
-                  onClick={() => scrollTo(link.href)}
+                  onClick={(e) => scrollTo(e, link.href)}
                   className="text-2xl font-heading font-semibold text-accent hover:text-primary transition-colors"
                   data-cursor-hover
                 >
                   {link.label}
-                </motion.button>
+                </motion.a>
               ))}
               <div className="mt-4">
                 <MagneticButton
                   variant="primary"
                   size="md"
-                  onClick={() => scrollTo('#contact')}
+                  onClick={() => {
+                    setMobileOpen(false);
+                    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
                 >
                   Request Quote
                 </MagneticButton>

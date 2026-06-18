@@ -160,7 +160,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center overflow-hidden" aria-label="FLUXION — Premium Customs Clearance and Freight Forwarding in UAE">
       {/* Background Video */}
       <div className="absolute inset-0">
         <video
@@ -209,7 +209,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 2.2, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              Moving Cargo{' '}
+              <span className="sr-only">FLUXION — </span>Moving Cargo{' '}
               <span className="relative">
                 <span className="gradient-text">Beyond Borders</span>
                 <motion.svg
@@ -249,6 +249,16 @@ export default function Hero() {
               Premium customs clearance, freight forwarding, container transportation,
               and cargo movement solutions connecting businesses across the GCC.
             </motion.p>
+
+            {/* Visually-hidden SEO content for crawlers */}
+            <p className="sr-only">
+              FLUXION is the leading customs clearance and freight forwarding company in Sharjah, UAE. 
+              We provide import clearance, export clearance, customs brokerage, air freight, sea freight, 
+              land freight, container transportation, oversized cargo transport, heavy equipment transport, 
+              project cargo logistics, and cross-border transport services across Dubai, Abu Dhabi, 
+              Sharjah, Riyadh, Jeddah, Muscat, Doha, Kuwait City, and Manama. 
+              Contact Fluxion for the best logistics solutions in the GCC.
+            </p>
 
             {/* CTAs */}
             <motion.div

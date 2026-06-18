@@ -1,0 +1,26 @@
+/* TEAM */
+Company: FLUXION Logistics
+Location: Sharjah, United Arab Emirates
+Contact: info@fluxionuae.com
+Phone: +971 58 925 0501
+Founded: 2009
+
+/* SERVICES */
+Customs Clearance (UAE, Dubai, Sharjah, Abu Dhabi)
+Import & Export Clearance
+Freight Forwarding (Air, Sea, Land)
+Container Transportation (FCL & LCL)
+GCC Cargo Movement
+Oversized Cargo Transport
+Heavy Equipment Transport
+Project Cargo Logistics
+Cross-Border Transport (All GCC)
+
+/* SITE */
+Framework: Next.js 16
+Language: TypeScript
+UI Library: React 19
+Styling: Tailwind CSS 4
+Animation: Framer Motion, GSAP
+3D: Three.js, React Three Fiber
+Standards: HTML5, CSS3, ES2024

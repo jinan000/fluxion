@@ -235,7 +235,7 @@ export default function Fleet() {
   ];
 
   return (
-    <section id="fleet" className="section-padding bg-white relative overflow-hidden">
+    <section id="fleet" className="section-padding bg-white relative overflow-hidden" aria-label="FLUXION Transport Fleet - Heavy Duty Trucks, Container Carriers, Low Bed Trailers UAE">
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-primary/3 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative">
@@ -265,7 +265,7 @@ export default function Fleet() {
                   <div className="relative h-48 overflow-hidden rounded-t-2xl">
                     <Image
                       src={vehicle.image}
-                      alt={vehicle.name}
+                      alt={`FLUXION ${vehicle.name} - ${vehicle.desc}`}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
                       sizes="340px"
