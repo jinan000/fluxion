@@ -4,7 +4,7 @@ import { join } from "node:path";
 
 // Image metadata
 export const alt =
-  "FLUXION — Premium Customs Clearance & Freight Forwarding in UAE | GCC Logistics";
+  "FLUXION UAE — Premium Customs Clearance & Freight Forwarding | GCC Logistics";
 export const size = {
   width: 1200,
   height: 630,

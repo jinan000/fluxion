@@ -33,14 +33,14 @@ export default function About() {
         <SectionReveal>
           <div className="text-center mb-20">
             <span className="text-xs font-medium tracking-[0.3em] uppercase text-primary mb-4 block">
-              About Fluxion
+              About Fluxion UAE
             </span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-accent mb-6">
               Your Trusted GCC{' '}
               <span className="gradient-text">Logistics Partner</span>
             </h2>
             <p className="text-text-light text-lg max-w-2xl mx-auto leading-relaxed">
-              Headquartered in Sharjah, UAE, we deliver premium customs clearance and
+              Headquartered in Sharjah, UAE, Fluxion UAE delivers premium customs clearance and
               freight forwarding excellence across the entire Gulf Cooperation Council region.
             </p>
           </div>
@@ -77,7 +77,7 @@ export default function About() {
                 Excellence in Every Shipment
               </h3>
               <p className="text-text-light leading-relaxed mb-6">
-                Since our founding, FLUXION has been at the forefront of logistics innovation
+                Since our founding, FLUXION UAE has been at the forefront of logistics innovation
                 in the Gulf region. We specialize in customs clearance, freight forwarding,
                 container transportation, and project cargo handling — serving multinational
                 corporations, government projects, and industrial clients.

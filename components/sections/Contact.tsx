@@ -72,21 +72,21 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="section-padding bg-bg-soft relative overflow-hidden" aria-label="Contact FLUXION Logistics - Request a Quote for Customs Clearance and Freight Forwarding in UAE">
+    <section id="contact" className="section-padding bg-bg-soft relative overflow-hidden" aria-label="Contact FLUXION UAE - Request a Quote for Customs Clearance and Freight Forwarding in UAE">
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-primary/3 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative">
         <SectionReveal>
           <div className="text-center mb-16">
             <span className="text-xs font-medium tracking-[0.3em] uppercase text-primary mb-4 block">
-              Get In Touch
+              Contact FLUXION UAE
             </span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-accent mb-6">
               Let&apos;s Move Your{' '}
               <span className="gradient-text">Cargo</span>
             </h2>
             <p className="text-text-light text-lg max-w-2xl mx-auto">
-              Request a quote or reach out to our logistics team. We respond within 2 hours
+              Request a quote from FLUXION UAE or reach out to our logistics team. We respond within 2 hours
               during business hours.
             </p>
           </div>

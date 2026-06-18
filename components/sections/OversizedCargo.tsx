@@ -14,7 +14,7 @@ const capabilities = [
 
 export default function OversizedCargo() {
   return (
-    <section className="section-padding bg-bg-soft relative overflow-hidden" aria-label="FLUXION Oversized and Heavy Cargo Transport - Low Bed Trailer and Heavy Equipment Transport UAE">
+    <section className="section-padding bg-bg-soft relative overflow-hidden" aria-label="FLUXION UAE Oversized and Heavy Cargo Transport - Low Bed Trailer and Heavy Equipment Transport UAE">
       <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-primary/3 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative">
@@ -30,7 +30,7 @@ export default function OversizedCargo() {
                 <span className="gradient-text">Cargo Experts</span>
               </h2>
               <p className="text-text-light text-lg leading-relaxed mb-8">
-                When standard logistics won&apos;t do, FLUXION delivers. Our specialized fleet
+                When standard logistics won&apos;t do, FLUXION UAE delivers. Our specialized fleet
                 handles oversized machinery, industrial transformers, construction equipment,
                 and project cargo with meticulous route planning and expert precision.
               </p>

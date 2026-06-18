@@ -91,17 +91,17 @@ const advantages = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="section-padding bg-bg-soft relative overflow-hidden" aria-label="Why Choose FLUXION - Best Customs Clearance and Freight Forwarding Company in UAE">
+    <section className="section-padding bg-bg-soft relative overflow-hidden" aria-label="Why Choose FLUXION UAE - Best Customs Clearance and Freight Forwarding Company in UAE">
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/3 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative">
         <SectionReveal>
           <div className="text-center mb-16">
             <span className="text-xs font-medium tracking-[0.3em] uppercase text-primary mb-4 block">
-              Why Choose Us
+              Why Choose FLUXION UAE
             </span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-accent mb-6">
-              The FLUXION{' '}
+              The FLUXION UAE{' '}
               <span className="gradient-text">Advantage</span>
             </h2>
             <p className="text-text-light text-lg max-w-2xl mx-auto">

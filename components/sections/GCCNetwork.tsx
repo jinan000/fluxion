@@ -69,7 +69,7 @@ export default function GCCNetwork() {
   }, [activeCountry]);
 
   return (
-    <section id="network" className="section-padding bg-gradient-to-br from-accent to-[#0D2340] relative overflow-hidden" aria-label="FLUXION GCC Logistics Network - UAE, Saudi Arabia, Oman, Qatar, Kuwait, Bahrain">
+    <section id="network" className="section-padding bg-gradient-to-br from-accent to-[#0D2340] relative overflow-hidden" aria-label="FLUXION UAE GCC Logistics Network - UAE, Saudi Arabia, Oman, Qatar, Kuwait, Bahrain">
       {/* Background effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-[80px]" />

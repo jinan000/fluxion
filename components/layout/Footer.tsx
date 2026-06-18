@@ -87,7 +87,7 @@ export default function Footer() {
                 className="h-14 w-auto object-contain mb-4"
               />
               <p className="text-text-light text-sm leading-relaxed mb-6">
-                Premium customs clearance, freight forwarding, and cargo transportation
+                FLUXION UAE provides premium customs clearance, freight forwarding, and cargo transportation
                 solutions connecting businesses across the GCC.
               </p>
               {/* Social Icons */}
@@ -200,7 +200,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="py-6 border-t border-primary/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-text-light/80">
-            © {new Date().getFullYear()} FLUXION. All rights reserved. Sharjah, UAE.
+            © {new Date().getFullYear()} FLUXION UAE. All rights reserved. Sharjah, UAE.
           </p>
           <div className="flex gap-6">
             <a href="#" className="text-xs text-text-light/80 hover:text-primary transition-colors" data-cursor-hover>

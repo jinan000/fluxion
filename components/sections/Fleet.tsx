@@ -235,21 +235,21 @@ export default function Fleet() {
   ];
 
   return (
-    <section id="fleet" className="section-padding bg-white relative overflow-hidden" aria-label="FLUXION Transport Fleet - Heavy Duty Trucks, Container Carriers, Low Bed Trailers UAE">
+    <section id="fleet" className="section-padding bg-white relative overflow-hidden" aria-label="FLUXION UAE Transport Fleet - Heavy Duty Trucks, Container Carriers, Low Bed Trailers UAE">
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-primary/3 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative">
         <SectionReveal>
           <div className="text-center mb-16">
             <span className="text-xs font-medium tracking-[0.3em] uppercase text-primary mb-4 block">
-              Our Fleet
+              FLUXION UAE Fleet
             </span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-accent mb-6">
               Modern Transport{' '}
               <span className="gradient-text">Fleet</span>
             </h2>
             <p className="text-text-light text-lg max-w-2xl mx-auto">
-              A state-of-the-art fleet designed for every cargo challenge — from standard
+              A state-of-the-art FLUXION UAE fleet designed for every cargo challenge — from standard
               containers to oversized project loads.
             </p>
           </div>

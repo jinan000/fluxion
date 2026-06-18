@@ -101,7 +101,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="section-padding bg-white relative overflow-hidden" aria-label="FLUXION Logistics Services - Customs Clearance, Freight Forwarding, Container Transportation">
+    <section id="services" className="section-padding bg-white relative overflow-hidden" aria-label="FLUXION UAE Logistics Services - Customs Clearance, Freight Forwarding, Container Transportation">
       {/* Background decoration */}
       <div className="absolute top-20 left-0 w-72 h-72 bg-primary/3 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-20 right-0 w-96 h-96 bg-accent/3 rounded-full blur-[120px] pointer-events-none" />
@@ -111,14 +111,14 @@ export default function Services() {
         <SectionReveal>
           <div className="text-center mb-16">
             <span className="text-xs font-medium tracking-[0.3em] uppercase text-primary mb-4 block">
-              Our Services
+              FLUXION UAE Services
             </span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-accent mb-6">
               Comprehensive Logistics{' '}
               <span className="gradient-text">Solutions</span>
             </h2>
             <p className="text-text-light text-lg max-w-2xl mx-auto">
-              From customs clearance to oversized cargo, we handle every aspect of your
+              From customs clearance to oversized cargo, FLUXION UAE handles every aspect of your
               supply chain across the GCC with precision and expertise.
             </p>
           </div>

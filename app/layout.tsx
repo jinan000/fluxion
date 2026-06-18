@@ -20,9 +20,9 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   title:
-    "FLUXION — #1 Customs Clearance & Freight Forwarding in UAE | Sharjah Logistics Company",
+    "FLUXION UAE — #1 Customs Clearance & Freight Forwarding | Sharjah Logistics Company",
   description:
-    "FLUXION is the leading customs clearance, freight forwarding, container transportation & cargo movement company in UAE. Serving Dubai, Sharjah, Abu Dhabi & all GCC countries. Get a free quote today.",
+    "FLUXION UAE is the leading customs clearance, freight forwarding, container transportation & cargo movement company in UAE. Serving Dubai, Sharjah, Abu Dhabi & all GCC countries. Get a free quote today.",
   keywords: [
     // ── Brand Keywords ──
     "Fluxion",
@@ -133,28 +133,28 @@ export const metadata: Metadata = {
   publisher: "FLUXION Logistics",
   category: "Logistics & Transportation",
   openGraph: {
-    title: "FLUXION — Premium Customs Clearance & Freight Forwarding | UAE Logistics",
+    title: "FLUXION UAE — Premium Customs Clearance & Freight Forwarding | UAE Logistics",
     description:
-      "Leading customs clearance, freight forwarding, and cargo transportation company in UAE. Serving all GCC countries from Sharjah. Request a free quote.",
+      "FLUXION UAE is the leading customs clearance, freight forwarding, and cargo transportation company in UAE. Serving all GCC countries from Sharjah. Request a free quote.",
     type: "website",
     locale: "en_AE",
-    siteName: "FLUXION Logistics",
+    siteName: "FLUXION UAE Logistics",
     url: "https://fluxionuae.com",
     images: [
       {
         url: "/images/og-image.png",
         width: 1200,
         height: 630,
-        alt: "FLUXION Logistics — Premium Customs Clearance & Freight Forwarding in UAE",
+        alt: "FLUXION UAE Logistics — Premium Customs Clearance & Freight Forwarding in UAE",
         type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "FLUXION — #1 Customs Clearance & Freight Forwarding in UAE",
+    title: "FLUXION UAE — #1 Customs Clearance & Freight Forwarding in UAE",
     description:
-      "Premium customs clearance, freight forwarding, container transportation & cargo movement across the GCC. Headquartered in Sharjah, UAE.",
+      "FLUXION UAE is the premium customs clearance, freight forwarding, container transportation & cargo movement across the GCC. Headquartered in Sharjah, UAE.",
     images: ["/images/og-image.png"],
     creator: "@fluxionuae",
     site: "@fluxionuae",

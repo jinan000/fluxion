@@ -2,10 +2,10 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "FLUXION Logistics — Customs Clearance & Freight Forwarding UAE",
-    short_name: "FLUXION",
+    name: "FLUXION UAE Logistics — Customs Clearance & Freight Forwarding",
+    short_name: "FLUXION UAE",
     description:
-      "Premium customs clearance, freight forwarding, container transportation & cargo movement across the GCC. Headquartered in Sharjah, UAE.",
+      "FLUXION UAE is the premium customs clearance, freight forwarding, container transportation & cargo movement across the GCC. Headquartered in Sharjah, UAE.",
     start_url: "/",
     display: "standalone",
     background_color: "#FAFBFC",
