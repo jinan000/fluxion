@@ -1,5 +1,6 @@
 'use client';
 
+import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import SmoothScrollProvider from '@/lib/smooth-scroll';
 import Navbar from '@/components/layout/Navbar';
@@ -29,7 +30,9 @@ export default function Home() {
       <LoadingScreen />
 
       {/* Custom Cursor */}
-      <CustomCursor />
+      <Suspense fallback={null}>
+        <CustomCursor />
+      </Suspense>
 
       {/* Scroll Progress */}
       <ScrollProgress />
