@@ -125,7 +125,7 @@ export default function Services() {
         </SectionReveal>
 
         {/* Services Grid */}
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5" stagger={0.08}>
+        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" stagger={0.08}>
           {services.map((service, i) => (
             <StaggerItem key={service.title}>
               <GlassCard className="h-full group" id={`service-${service.title.toLowerCase().replace(/\s+/g, '-')}`}>

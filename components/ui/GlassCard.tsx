@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 interface GlassCardProps {
@@ -24,9 +24,18 @@ export default function GlassCard({
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
   const [glowPosition, setGlowPosition] = useState({ x: 50, y: 50 });
+  const [isTouch, setIsTouch] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(pointer: coarse)');
+    setIsTouch(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsTouch(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!tilt || !cardRef.current) return;
+    if (!tilt || !cardRef.current || isTouch) return;
 
     const { left, top, width, height } = cardRef.current.getBoundingClientRect();
     const x = (e.clientX - left) / width;
@@ -54,7 +63,7 @@ export default function GlassCard({
         rotateY: tilt ? rotateY : 0,
       }}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-      whileHover={hover ? { y: -6, scale: 1.01 } : {}}
+      whileHover={(hover && !isTouch) ? { y: -6, scale: 1.01 } : {}}
       className={`
         relative overflow-hidden rounded-2xl
         glass-light shadow-premium

@@ -50,7 +50,7 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
           {/* Image */}
           <SectionReveal direction="left">
-            <div className="relative rounded-2xl overflow-hidden shadow-premium-lg h-[440px]">
+            <div className="relative rounded-2xl overflow-hidden shadow-premium-lg h-[280px] md:h-[360px] lg:h-[440px]">
               <Image
                 src="/images/about.png"
                 alt="FLUXION Logistics Operations Center in Sharjah UAE - Customs clearance and freight forwarding headquarters"
@@ -115,7 +115,7 @@ export default function About() {
         <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20" stagger={0.15}>
           {stats.map((stat) => (
             <StaggerItem key={stat.label}>
-              <div className="text-center p-8 rounded-2xl bg-white shadow-premium hover:shadow-premium-hover transition-shadow duration-500">
+              <div className="text-center p-5 sm:p-8 rounded-2xl bg-white shadow-premium hover:shadow-premium-hover transition-shadow duration-500">
                 <div className="text-3xl md:text-4xl font-heading font-bold gradient-text mb-2">
                   <AnimatedCounter end={stat.value} suffix={stat.suffix} />
                 </div>
@@ -142,9 +142,7 @@ export default function About() {
                   direction={i % 2 === 0 ? 'left' : 'right'}
                   delay={i * 0.1}
                 >
-                  <div className={`md:grid md:grid-cols-2 md:gap-12 mb-8 ${
-                    i % 2 === 0 ? '' : 'md:direction-rtl'
-                  }`}>
+                  <div className={`md:grid md:grid-cols-2 md:gap-12 mb-8`}>
                     <div className={`${i % 2 === 0 ? 'md:text-right' : 'md:text-left md:col-start-2'} mb-4 md:mb-0`}>
                       <span className="text-primary font-heading font-bold text-xl">{milestone.year}</span>
                       <h4 className="text-lg font-heading font-semibold text-accent mt-1">{milestone.title}</h4>

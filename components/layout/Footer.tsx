@@ -178,7 +178,7 @@ export default function Footer() {
               <h4 className="text-sm font-heading font-semibold tracking-wider text-accent uppercase mb-4">
                 Newsletter
               </h4>
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <input
                   type="email"
                   placeholder="Your email"

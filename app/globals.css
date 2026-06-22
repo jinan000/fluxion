@@ -42,6 +42,8 @@
     color: var(--color-text);
     background-color: var(--color-bg-white);
     overflow-x: hidden;
+    touch-action: pan-x pan-y;
+    -webkit-tap-highlight-color: transparent;
   }
 }
 
@@ -273,7 +275,13 @@
    ═══════════════════════════════════════════ */
 
 .section-padding {
-  padding: 7rem 1.5rem;
+  padding: 4.5rem 1rem;
+}
+
+@media (min-width: 640px) {
+  .section-padding {
+    padding: 6rem 1.5rem;
+  }
 }
 
 @media (min-width: 768px) {
@@ -286,6 +294,17 @@
   .section-padding {
     padding: 10rem 4rem;
   }
+}
+
+/* Dynamic viewport height for mobile */
+.min-h-dvh {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Prevent body scroll when mobile menu is open */
+.overflow-hidden {
+  overflow: hidden;
 }
 
 /* ═══════════════════════════════════════════

@@ -71,7 +71,7 @@ export default function OversizedCargo() {
           {/* Image */}
           <SectionReveal direction="right">
             <div className="relative">
-              <div className="rounded-2xl overflow-hidden shadow-premium-lg h-[480px] relative">
+              <div className="rounded-2xl overflow-hidden shadow-premium-lg h-[280px] md:h-[380px] lg:h-[480px] relative">
                 <Image
                   src="/images/oversized-cargo.png"
                   alt="FLUXION oversized cargo and heavy equipment transportation service in UAE - Low bed trailer carrying industrial machinery"
@@ -83,7 +83,7 @@ export default function OversizedCargo() {
 
               {/* Floating badge */}
               <motion.div
-                className="absolute -bottom-4 -left-4 glass-light rounded-xl px-6 py-4 shadow-premium-lg"
+                className="absolute bottom-4 left-4 sm:-bottom-4 sm:-left-4 glass-light rounded-xl px-4 sm:px-6 py-3 sm:py-4 shadow-premium-lg z-10"
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
               >

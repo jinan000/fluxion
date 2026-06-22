@@ -96,7 +96,7 @@ export default function GCCNetwork() {
          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
            {/* Interactive Globe / Map Container */}
            <SectionReveal direction="left" className="lg:col-span-3">
-             <div className="relative w-full aspect-square max-h-[500px] md:max-h-[550px] lg:max-h-[600px] overflow-hidden flex items-center justify-center">
+             <div className="relative w-full aspect-square max-h-[300px] md:max-h-[450px] lg:max-h-[600px] overflow-hidden flex items-center justify-center">
               {isMobile ? (
                 <DottedMap 
                   markers={dottedMapMarkers}
@@ -126,12 +126,12 @@ export default function GCCNetwork() {
 
           {/* Country Info Panel */}
           <SectionReveal direction="right" className="lg:col-span-2">
-            <div className="space-y-4">
+            <div className="space-y-3">
               {countries.map((country) => (
                 <motion.div
                   key={country.id}
                   onClick={() => toggleCountry(country)}
-                  className={`p-5 rounded-xl border transition-all duration-300 cursor-pointer ${
+                  className={`p-4 rounded-xl border transition-all duration-300 cursor-pointer ${
                     activeCountry?.id === country.id
                       ? 'bg-secondary/10 border-secondary/30'
                       : 'bg-white/5 border-white/5 hover:border-white/15'

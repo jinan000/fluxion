@@ -26,6 +26,16 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileOpen]);
+
   const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setMobileOpen(false);
@@ -38,7 +48,7 @@ export default function Navbar() {
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 1.8, ease: [0.25, 0.1, 0.25, 1] }}
+        transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
         className={`fixed top-0 left-0 right-0 z-[9990] transition-all duration-500 ${
           scrolled
             ? 'py-2 glass-light shadow-premium'
@@ -60,7 +70,7 @@ export default function Navbar() {
               width={1548}
               height={509}
               className={`w-auto object-contain transition-all duration-500 ${
-                scrolled ? 'h-12' : 'h-16'
+                scrolled ? 'h-9 sm:h-10 lg:h-12' : 'h-10 sm:h-12 lg:h-16'
               }`}
               priority
             />
@@ -99,8 +109,9 @@ export default function Navbar() {
           {/* Mobile Hamburger */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden relative z-50 w-10 h-10 flex flex-col items-center justify-center gap-1.5"
+            className="lg:hidden relative z-[9995] w-10 h-10 flex flex-col items-center justify-center gap-1.5"
             data-cursor-hover
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           >
             <motion.span
               animate={{
@@ -132,7 +143,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[9985] bg-white/95 backdrop-blur-xl lg:hidden flex items-center justify-center"
+            className="fixed inset-0 z-[9985] bg-white/95 backdrop-blur-xl lg:hidden flex items-center justify-center pt-safe-top pb-safe-bottom"
           >
             <motion.div
               initial={{ opacity: 0, y: 20 }}

@@ -8,6 +8,7 @@ import Image from 'next/image';
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isMobileRatio, setIsMobileRatio] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Aspect-ratio detection for mobile 9:16 video
   useEffect(() => {
@@ -30,6 +31,15 @@ export default function Hero() {
     };
   }, []);
 
+  // Detect mobile viewport for canvas optimization
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
   // Animated route lines on canvas
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -49,8 +59,12 @@ export default function Hero() {
     resize();
     window.addEventListener('resize', resize);
 
+    // Fewer nodes on mobile for performance
+    const nodeCount = isMobile ? 10 : 18;
+    const cargoCount = isMobile ? 3 : 6;
+
     // Route nodes
-    const nodes = Array.from({ length: 18 }, () => ({
+    const nodes = Array.from({ length: nodeCount }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
       vx: (Math.random() - 0.5) * 0.3,
@@ -59,7 +73,7 @@ export default function Hero() {
     }));
 
     // Moving cargo dots
-    const cargoDots = Array.from({ length: 6 }, () => ({
+    const cargoDots = Array.from({ length: cargoCount }, () => ({
       progress: Math.random(),
       speed: 0.001 + Math.random() * 0.002,
       fromNode: Math.floor(Math.random() * nodes.length),
@@ -93,17 +107,18 @@ export default function Hero() {
       });
 
       // Draw connections
+      const connectionDist = isMobile ? 180 : 250;
       nodes.forEach((a, i) => {
         nodes.forEach((b, j) => {
           if (i >= j) return;
           const dx = a.x - b.x;
           const dy = a.y - b.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 250) {
+          if (dist < connectionDist) {
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = `rgba(27, 77, 84, ${0.1 * (1 - dist / 250)})`;
+            ctx.strokeStyle = `rgba(27, 77, 84, ${0.1 * (1 - dist / connectionDist)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -153,14 +168,14 @@ export default function Hero() {
       window.removeEventListener('resize', resize);
       observer.disconnect();
     };
-  }, []);
+  }, [isMobile]);
 
   const scrollTo = (href: string) => {
     document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center overflow-hidden" aria-label="FLUXION — Premium Customs Clearance and Freight Forwarding in UAE">
+    <section id="hero" className="relative min-h-screen min-h-dvh flex items-center overflow-hidden" aria-label="FLUXION — Premium Customs Clearance and Freight Forwarding in UAE">
       {/* Background Video */}
       <div className="absolute inset-0">
         <video
@@ -185,39 +200,36 @@ export default function Hero() {
       />
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-24 pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full pt-20 sm:pt-24 pb-16 sm:pb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Text Content */}
           <div>
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 2, duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/15 mb-8"
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary/5 border border-primary/15 mb-6 sm:mb-8"
             >
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <span className="text-xs text-text-light font-semibold tracking-wider uppercase">
+              <span className="text-[10px] sm:text-xs text-text-light font-semibold tracking-wider uppercase">
                 FLUXION UAE — GCC&apos;s Premier Logistics Partner
               </span>
             </motion.div>
 
             {/* Headline */}
             <motion.h1
-              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-accent leading-[1.1] mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-accent leading-[1.1] mb-4 sm:mb-6"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 2.2, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ delay: 0.5, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <span className="sr-only">FLUXION UAE — </span>Moving Cargo{' '}
               <span className="relative">
                 <span className="gradient-text">Beyond Borders</span>
-                <motion.svg
+                <svg
                   className="absolute -bottom-2 left-0 w-full"
                   viewBox="0 0 300 12"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ delay: 3, duration: 1.2 }}
                 >
                   <motion.path
                     d="M 0 8 Q 75 0, 150 8 Q 225 16, 300 8"
@@ -226,7 +238,7 @@ export default function Hero() {
                     strokeWidth="2"
                     initial={{ pathLength: 0 }}
                     animate={{ pathLength: 1 }}
-                    transition={{ delay: 3, duration: 1.2 }}
+                    transition={{ delay: 1.3, duration: 1.2 }}
                   />
                   <defs>
                     <linearGradient id="heroUnderline" x1="0" y1="0" x2="1" y2="0">
@@ -234,17 +246,17 @@ export default function Hero() {
                       <stop offset="100%" stopColor="#236B75" />
                     </linearGradient>
                   </defs>
-                </motion.svg>
+                </svg>
               </span>
               <span className="text-accent">.</span>
             </motion.h1>
 
             {/* Subheadline */}
             <motion.p
-              className="text-lg md:text-xl text-text leading-relaxed mb-10 max-w-xl"
+              className="text-base sm:text-lg md:text-xl text-text leading-relaxed mb-8 sm:mb-10 max-w-xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 2.5, duration: 0.7 }}
+              transition={{ delay: 0.8, duration: 0.7 }}
             >
               Premium customs clearance, freight forwarding, container transportation,
               and cargo movement solutions connecting businesses across the GCC.
@@ -262,28 +274,28 @@ export default function Hero() {
 
             {/* CTAs */}
             <motion.div
-              className="flex flex-wrap gap-4"
+              className="flex flex-wrap gap-3 sm:gap-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 2.8, duration: 0.6 }}
+              transition={{ delay: 1.0, duration: 0.6 }}
             >
-              <MagneticButton variant="primary" size="lg" onClick={() => scrollTo('#contact')}>
+              <MagneticButton variant="primary" size={isMobile ? 'md' : 'lg'} onClick={() => scrollTo('#contact')}>
                 Request Quote
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </MagneticButton>
-              <MagneticButton variant="outline" size="lg" onClick={() => scrollTo('#services')}>
+              <MagneticButton variant="outline" size={isMobile ? 'md' : 'lg'} onClick={() => scrollTo('#services')}>
                 Explore Services
               </MagneticButton>
             </motion.div>
 
             {/* Stats row */}
             <motion.div
-              className="flex gap-8 mt-12 pt-8 border-t border-primary/10"
+              className="flex gap-4 sm:gap-6 md:gap-8 mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-primary/10"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 3.2, duration: 0.8 }}
+              transition={{ delay: 1.4, duration: 0.8 }}
             >
               {[
                 { value: '5+', label: 'Years Experience' },
@@ -291,10 +303,10 @@ export default function Hero() {
                 { value: '5000+', label: 'Shipments Yearly' },
               ].map((stat) => (
                 <div key={stat.label}>
-                  <div className="text-2xl md:text-3xl font-heading font-bold text-primary">
+                  <div className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-primary">
                     {stat.value}
                   </div>
-                  <div className="text-xs text-text-light mt-1">{stat.label}</div>
+                  <div className="text-[10px] sm:text-xs text-text-light mt-1">{stat.label}</div>
                 </div>
               ))}
             </motion.div>
@@ -305,10 +317,10 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+        className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 3.5 }}
+        transition={{ delay: 1.7 }}
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}

@@ -115,7 +115,7 @@ export default function WhyChooseUs() {
             <StaggerItem key={adv.title}>
               <motion.div
                 whileHover={{ y: -6 }}
-                className="group p-6 rounded-2xl bg-white shadow-premium hover:shadow-premium-hover transition-all duration-500 h-full"
+                className="group p-5 sm:p-6 rounded-2xl bg-white shadow-premium hover:shadow-premium-hover transition-all duration-500 h-full"
                 data-cursor-hover
               >
                 {/* Icon */}

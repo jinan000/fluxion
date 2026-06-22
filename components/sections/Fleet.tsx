@@ -260,7 +260,7 @@ export default function Fleet() {
           <div className="flex gap-6 min-w-max">
             {fleet.map((vehicle, i) => (
               <SectionReveal key={vehicle.name} delay={i * 0.1}>
-                <GlassCard className="w-[340px] snap-center flex-shrink-0">
+                <GlassCard className="w-[280px] sm:w-[340px] snap-center flex-shrink-0">
                   {/* Image */}
                   <div className="relative h-48 overflow-hidden rounded-t-2xl">
                     <Image
@@ -306,7 +306,7 @@ export default function Fleet() {
               <motion.div
                 key={stat.label}
                 whileHover="hover"
-                className="group relative text-center p-6 rounded-xl bg-bg-soft border border-black/5 hover:border-primary/10 hover:shadow-premium transition-all duration-300 cursor-pointer overflow-hidden"
+                className="group relative text-center p-4 sm:p-6 rounded-xl bg-bg-soft border border-black/5 hover:border-primary/10 hover:shadow-premium transition-all duration-300 cursor-pointer overflow-hidden"
               >
                 {/* Micro-glow background effect on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/0 group-hover:from-primary/[0.02] group-hover:to-secondary/[0.04] transition-all duration-300 pointer-events-none" />

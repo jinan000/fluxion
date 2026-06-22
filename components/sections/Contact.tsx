@@ -95,7 +95,7 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
           {/* Contact Form */}
           <SectionReveal direction="left" className="lg:col-span-3">
-            <div className="bg-white rounded-2xl shadow-premium p-8 md:p-10">
+            <div className="bg-white rounded-2xl shadow-premium p-5 sm:p-8 lg:p-10">
               {submitted ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
